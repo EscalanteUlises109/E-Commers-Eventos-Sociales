@@ -2,6 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Baby, Heart, Briefcase, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import kidsEventImage from "@/assets/kids-event.jpg";
+import weddingEventImage from "@/assets/wedding-event.jpg";
+import corporateEventImage from "@/assets/corporate-event.jpg";
 
 const EventSelection = () => {
   const navigate = useNavigate();
@@ -12,6 +15,7 @@ const EventSelection = () => {
       subtitle: "DIVERSIÓN Y MAGIA",
       description: "Celebraciones llenas de color, risas y momentos mágicos para los más pequeños",
       icon: Baby,
+      image: kidsEventImage,
       features: [
         "Animación Profesional",
         "Decoración Temática", 
@@ -30,6 +34,7 @@ const EventSelection = () => {
       subtitle: "ELEGANCIA Y DISTINCIÓN",
       description: "Bodas, XV años y celebraciones que marcan momentos especiales con estilo único",
       icon: Heart,
+      image: weddingEventImage,
       features: [
         "Ceremonias Elegantes",
         "Fotografía de Lujo",
@@ -48,6 +53,7 @@ const EventSelection = () => {
       subtitle: "PROFESIONALISMO E IMPACTO", 
       description: "Conferencias y reuniones que proyectan excelencia y generan resultados",
       icon: Briefcase,
+      image: corporateEventImage,
       features: [
         "Tecnología AV",
         "Networking Premium",
@@ -85,13 +91,24 @@ const EventSelection = () => {
           {eventTypes.map((event, index) => (
             <Card 
               key={index} 
-              className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm cursor-pointer"
+              className="group relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer hover:-translate-y-2"
               onClick={() => handleEventSelection(event.route)}
             >
-              <CardContent className="p-8">
+              {/* Imagen de fondo */}
+              <div className="absolute inset-0">
+                <img 
+                  src={event.image} 
+                  alt={event.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-white/90 group-hover:bg-white/80 transition-colors duration-300"></div>
+                <div className={`absolute inset-0 ${event.iconGradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+              </div>
+
+              <CardContent className="relative z-10 p-8">
                 {/* Ícono */}
                 <div className="mb-6">
-                  <div className={`w-16 h-16 ${event.iconGradient} rounded-2xl flex items-center justify-center shadow-lg`}>
+                  <div className={`w-16 h-16 ${event.iconGradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
                     <event.icon className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -104,12 +121,12 @@ const EventSelection = () => {
                 </div>
 
                 {/* Título */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors duration-300">
                   {event.title}
                 </h3>
 
                 {/* Descripción */}
-                <p className="text-gray-600 text-base leading-relaxed mb-6">
+                <p className="text-gray-600 text-base leading-relaxed mb-6 group-hover:text-gray-700 transition-colors duration-300">
                   {event.description}
                 </p>
 
@@ -125,7 +142,7 @@ const EventSelection = () => {
 
                 {/* Botón */}
                 <Button 
-                  className={`w-full ${event.buttonGradient} hover:opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg`}
+                  className={`w-full ${event.buttonGradient} hover:opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:scale-105`}
                 >
                   <span className="flex items-center justify-center gap-2">
                     {event.buttonText}
