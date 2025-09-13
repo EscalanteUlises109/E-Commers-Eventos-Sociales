@@ -73,7 +73,7 @@ const EventSelection = () => {
               <span className="text-sm font-medium text-gray-700">Planificación de Eventos Premium</span>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-6 leading-tight tracking-tight">
               ¿Qué tipo de
               <span className="block bg-gradient-to-r from-rose-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                 evento quieres crear?
