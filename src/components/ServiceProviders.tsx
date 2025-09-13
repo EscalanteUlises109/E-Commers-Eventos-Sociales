@@ -20,7 +20,7 @@ import cateringEjecutivoImg from "@/assets/catering-ejecutivo.jpg";
 import produccionCorporativaImg from "@/assets/produccion-corporativa.jpg";
 import personalApoyoImg from "@/assets/personal-apoyo.jpg";
 
-const ServiceProviders = () => {
+const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales" | "corporativos" }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const services = {
@@ -164,11 +164,13 @@ const ServiceProviders = () => {
     ]
   };
 
-  const allServices = [
-    ...services.infantiles,
-    ...services.formales,
-    ...services.corporativos
-  ];
+  const allServices = eventType 
+    ? services[eventType] 
+    : [
+        ...services.infantiles,
+        ...services.formales,
+        ...services.corporativos
+      ];
 
   const serviceCount = allServices.length;
 

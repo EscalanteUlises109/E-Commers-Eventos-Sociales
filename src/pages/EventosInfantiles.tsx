@@ -73,7 +73,7 @@ const EventosInfantiles = () => {
 
         {/* Componentes existentes adaptados */}
         <div className="bg-gradient-to-b from-blue-50/50 to-purple-50/50">
-          <ServiceProviders />
+          <ServiceProviders eventType="infantiles" />
         </div>
       </main>
       <Footer />

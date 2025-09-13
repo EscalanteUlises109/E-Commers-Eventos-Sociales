@@ -74,7 +74,7 @@ const EventosCorporativos = () => {
 
         {/* Componentes existentes adaptados */}
         <div className="bg-gradient-to-b from-blue-50/50 to-cyan-50/50">
-          <ServiceProviders />
+          <ServiceProviders eventType="corporativos" />
         </div>
         <QuoteForm />
       </main>

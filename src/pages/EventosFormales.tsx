@@ -74,7 +74,7 @@ const EventosFormales = () => {
 
         {/* Componentes existentes adaptados */}
         <div className="bg-gradient-to-b from-rose-50/50 to-pink-50/50">
-          <ServiceProviders />
+          <ServiceProviders eventType="formales" />
         </div>
         <QuoteForm />
       </main>
