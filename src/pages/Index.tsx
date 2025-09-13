@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import EventTypes from "@/components/EventTypes";
 import Services from "@/components/Services";
+import ServiceProviders from "@/components/ServiceProviders";
 import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 
@@ -13,6 +14,7 @@ const Index = () => {
         <HeroSection />
         <EventTypes />
         <Services />
+        <ServiceProviders />
         <QuoteForm />
       </main>
       <Footer />
