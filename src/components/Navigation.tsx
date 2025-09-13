@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, User, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const navItems = [
     { name: "Inicio", href: "/" },
@@ -44,11 +46,39 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* Auth Buttons or User Menu */}
           <div className="hidden md:block">
-            <Button className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium px-6 py-2 rounded-full shadow-elegant transition-all duration-300 hover:shadow-luxury">
-              Cotizar Evento
-            </Button>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link to={user.role === 'cliente' ? '/dashboard-cliente' : '/dashboard-proveedor'}>
+                  <Button variant="outline" size="sm" className="flex items-center">
+                    <User className="w-4 h-4 mr-2" />
+                    {user.name}
+                  </Button>
+                </Link>
+                <Button 
+                  onClick={logout}
+                  variant="ghost" 
+                  size="sm"
+                  className="text-red-600 hover:text-red-700"
+                >
+                  <LogOut className="w-4 h-4" />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link to="/login-cliente">
+                  <Button variant="outline" size="sm">
+                    Cliente
+                  </Button>
+                </Link>
+                <Link to="/login-proveedor">
+                  <Button className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium px-4 py-2 rounded-full shadow-elegant transition-all duration-300 hover:shadow-luxury">
+                    Proveedor
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -77,10 +107,38 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-2">
-              <Button className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium py-2 rounded-full">
-                Cotizar Evento
-              </Button>
+            <div className="pt-2 space-y-2">
+              {user ? (
+                <div className="space-y-2">
+                  <Link to={user.role === 'cliente' ? '/dashboard-cliente' : '/dashboard-proveedor'}>
+                    <Button variant="outline" className="w-full">
+                      <User className="w-4 h-4 mr-2" />
+                      {user.name}
+                    </Button>
+                  </Link>
+                  <Button 
+                    onClick={logout}
+                    variant="ghost" 
+                    className="w-full text-red-600 hover:text-red-700"
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Cerrar Sesión
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <Link to="/login-cliente">
+                    <Button variant="outline" className="w-full">
+                      Acceso Cliente
+                    </Button>
+                  </Link>
+                  <Link to="/login-proveedor">
+                    <Button className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium py-2 rounded-full">
+                      Acceso Proveedor
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

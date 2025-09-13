@@ -1,0 +1,135 @@
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { User, Mail, Lock, ArrowRight } from "lucide-react";
+
+const LoginCliente = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, isLoading } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !password) {
+      toast({
+        title: "Error",
+        description: "Por favor complete todos los campos",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const success = await login(email, password, 'cliente');
+    
+    if (success) {
+      toast({
+        title: "¡Bienvenido!",
+        description: "Has iniciado sesión exitosamente",
+      });
+      navigate('/dashboard-cliente');
+    } else {
+      toast({
+        title: "Error de autenticación",
+        description: "Email o contraseña incorrectos",
+        variant: "destructive",
+      });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 to-gold-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <Card className="shadow-luxury border-0">
+          <CardHeader className="space-y-1 text-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-rose to-gold rounded-full flex items-center justify-center mx-auto mb-4">
+              <User className="w-8 h-8 text-white" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-foreground">
+              Acceso Clientes
+            </CardTitle>
+            <CardDescription className="text-elegant-gray">
+              Ingresa tus credenciales para acceder a tu cuenta
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-elegant-gray" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10"
+                    disabled={isLoading}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Contraseña</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-elegant-gray" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10"
+                    disabled={isLoading}
+                  />
+                </div>
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium py-2 rounded-full shadow-elegant transition-all duration-300 hover:shadow-luxury"
+                disabled={isLoading}
+              >
+                {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
+                {!isLoading && <ArrowRight className="ml-2 h-4 w-4" />}
+              </Button>
+            </form>
+            
+            <div className="mt-6 space-y-4">
+              <div className="text-center">
+                <p className="text-sm text-elegant-gray">
+                  ¿Eres proveedor?{" "}
+                  <Link to="/login-proveedor" className="text-rose hover:text-rose/80 font-medium">
+                    Inicia sesión aquí
+                  </Link>
+                </p>
+              </div>
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="font-semibold text-blue-800 mb-2">Cuenta Demo:</h4>
+                <p className="text-sm text-blue-700">
+                  <strong>Email:</strong> cliente@demo.com<br />
+                  <strong>Contraseña:</strong> 123456
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <div className="text-center mt-6">
+          <Link to="/" className="text-elegant-gray hover:text-foreground transition-colors">
+            ← Volver al inicio
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginCliente;
