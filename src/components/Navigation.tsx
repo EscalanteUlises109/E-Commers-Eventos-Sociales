@@ -33,8 +33,8 @@ const Navigation = () => {
       return [
         { name: "Inicio", href: "/inicio", icon: Home },
         { name: "Mi Negocio", href: "/dashboard-proveedor", icon: BarChart3 },
-        { name: "Clientes", href: "/dashboard-proveedor", icon: Users },
-        { name: "Reservas", href: "/dashboard-proveedor", icon: CalendarDays },
+        { name: "Clientes", href: "/proveedor-clientes", icon: Users },
+        { name: "Reservas", href: "/proveedor-reservas", icon: CalendarDays },
       ];
     }
   };

@@ -19,6 +19,8 @@ import LoginCliente from "./pages/LoginCliente";
 import LoginProveedor from "./pages/LoginProveedor";
 import DashboardCliente from "./pages/DashboardCliente";
 import DashboardProveedor from "./pages/DashboardProveedor";
+import ProveedorClientes from "./pages/ProveedorClientes";
+import ProveedorReservas from "./pages/ProveedorReservas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -47,6 +49,8 @@ const App = () => (
                 <Route path="/login-proveedor" element={<LoginProveedor />} />
                 <Route path="/dashboard-cliente" element={<DashboardCliente />} />
                 <Route path="/dashboard-proveedor" element={<DashboardProveedor />} />
+                <Route path="/proveedor-clientes" element={<ProveedorClientes />} />
+                <Route path="/proveedor-reservas" element={<ProveedorReservas />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
