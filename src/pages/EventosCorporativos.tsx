@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import EventSelection from "@/components/EventSelection";
 import Services from "@/components/Services";
 import ServiceProviders from "@/components/ServiceProviders";
 import QuoteForm from "@/components/QuoteForm";
@@ -40,58 +41,33 @@ const EventosCorporativos = () => {
     <div className="min-h-screen">
       <Navigation />
       <main>
-        {/* Hero Section Personalizado para Corporativos */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0">
-            <img 
-              src={corporateEventImage} 
-              alt="Eventos Corporativos" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 via-cyan-600/60 to-teal-600/80"></div>
-          </div>
-          
-          <div className="relative z-10 text-center text-white px-4">
-            <div className="mb-6">
-              <Briefcase className="w-16 h-16 mx-auto mb-4 text-white" />
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Eventos
-              <span className="block bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                Corporativos
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Conferencias, reuniones y lanzamientos que proyecten profesionalismo y generen impacto en tu industria
-            </p>
-            <Button className="bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
-              Planear Mi Evento Corporativo
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
-        </section>
-
-        {/* Servicios Especializados */}
+        {/* Primero las opciones de tipos de eventos */}
+        <EventSelection />
+        
+        {/* Después los planes específicos de eventos corporativos */}
         <section className="py-20 bg-gradient-to-b from-blue-50/50 to-cyan-50/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Soluciones Profesionales
+                Planes para Eventos Corporativos
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Tecnología y logística de primer nivel para eventos que generen resultados
+                Soluciones profesionales que proyecten excelencia y generen resultados
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {corporateServices.map((service, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm">
+                <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 bg-white/90 backdrop-blur-sm hover:-translate-y-2">
                   <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <service.icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-gray-600 text-sm">{service.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{service.description}</p>
+                    <Button className={`bg-gradient-to-r ${service.color} text-white font-semibold px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300`}>
+                      Ver Detalles
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -99,8 +75,8 @@ const EventosCorporativos = () => {
           </div>
         </section>
 
-        {/* Componentes existentes adaptados */}
-        <div className="bg-gradient-to-b from-blue-50/50 to-cyan-50/50">
+        {/* Proveedores especializados */}
+        <div className="bg-gradient-to-b from-cyan-50/50 to-blue-50/50">
           <ServiceProviders eventType="corporativos" />
         </div>
         <QuoteForm />
