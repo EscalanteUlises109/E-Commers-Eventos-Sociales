@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, Gift } from "lucide-react";
+import { Baby, Heart, Briefcase, ArrowRight, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
@@ -56,32 +56,6 @@ const EventSelection = () => {
     navigate(route);
   };
 
-  const specializedServices = [
-    {
-      title: "Animación Profesional",
-      description: "Shows interactivos con magos, payasos y personajes favoritos",
-      icon: Music,
-      color: "from-blue-400 to-purple-500"
-    },
-    {
-      title: "Decoración Temática", 
-      description: "Ambientación personalizada con los temas favoritos de los niños",
-      icon: Palette,
-      color: "from-purple-400 to-pink-500"
-    },
-    {
-      title: "Fotografía Infantil",
-      description: "Captura cada momento especial con estilo artístico", 
-      icon: Camera,
-      color: "from-pink-400 to-rose-500"
-    },
-    {
-      title: "Sorpresas y Regalos",
-      description: "Detalles especiales que harán sonreír a todos los niños",
-      icon: Gift,
-      color: "from-rose-400 to-orange-500"
-    }
-  ];
 
 
   return (
@@ -182,40 +156,6 @@ const EventSelection = () => {
             ))}
           </div>
 
-          {/* Servicios Especializados Section */}
-          <section className="mt-32 mb-24">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Servicios 
-                <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent ml-2">
-                  Especializados
-                </span>
-              </h2>
-              <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
-                Todo lo que necesitas para hacer de la celebración un momento inolvidable
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {specializedServices.map((service, index) => (
-                <Card key={index} className="group border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
-                  <CardHeader className="text-center pb-2">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                      <service.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-blue-600 transition-colors duration-300">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-elegant-gray text-center">
-                      {service.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
 
 
           {/* Footer Note */}
