@@ -16,10 +16,22 @@ const Welcome = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 font-montserrat flex items-center justify-center p-4 transition-all duration-700 ${isAnimating ? 'scale-110 opacity-0' : 'scale-100 opacity-100'}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 font-montserrat flex items-center justify-center p-4 transition-all duration-1000 ${isAnimating ? 'scale-125 opacity-0 blur-sm' : 'scale-100 opacity-100 blur-0'}`}>
+      
+      {/* Transition Overlay */}
+      {isAnimating && (
+        <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 z-50 animate-fade-in">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mb-4 mx-auto"></div>
+              <p className="text-white text-lg font-medium animate-pulse">Preparando tu experiencia...</p>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-all duration-1000 ${isAnimating ? 'scale-150 rotate-12 opacity-20' : 'scale-100 rotate-0 opacity-100'}`}>
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
@@ -27,7 +39,7 @@ const Welcome = () => {
       </div>
 
       {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-all duration-1000 ${isAnimating ? 'scale-110 opacity-30' : 'scale-100 opacity-100'}`}>
         <div className="absolute top-20 left-10 w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
         <div className="absolute top-32 right-20 w-1 h-1 bg-pink-300/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
         <div className="absolute bottom-40 left-32 w-1.5 h-1.5 bg-blue-300/50 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
