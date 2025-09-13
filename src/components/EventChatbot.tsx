@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Bot, User, ArrowRight } from "lucide-react";
+import { Bot, User, ArrowRight, RotateCcw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface Message {
@@ -33,7 +32,7 @@ const EventChatbot = () => {
   const questions: ChatQuestion[] = [
     {
       id: "occasion",
-      text: "¡Hola! Soy tu asistente para eventos. ¿Para qué ocasión necesitas el evento?",
+      text: "¡Hola! ¿Para qué ocasión necesitas el evento?",
       options: [
         { text: "Cumpleaños de niño/a", value: "kids_birthday" },
         { text: "Boda o XV años", value: "wedding" },
@@ -191,96 +190,81 @@ const EventChatbot = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      <Card className="w-full max-w-2xl mx-auto shadow-2xl border-0">
-        <CardContent className="p-0">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl mx-auto">
+        {/* Messages Container */}
+        <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 shadow-2xl border border-white/20">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white p-6 rounded-t-lg">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                <Bot className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Asistente de Eventos</h3>
-                <p className="text-white/80 text-sm">Te ayudo a encontrar el evento perfecto</p>
-              </div>
+          <div className="text-center mb-6">
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+              <Bot className="w-8 h-8 text-white" />
             </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Asistente de Eventos</h2>
+            <p className="text-white/80 text-sm">Te ayudo a encontrar tu evento ideal</p>
           </div>
 
-          {/* Messages */}
-          <div className="h-96 overflow-y-auto p-6 space-y-4">
+          {/* Messages Area */}
+          <div className="h-80 overflow-y-auto mb-6 space-y-4 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex animate-fade-in ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.sender === 'bot' && (
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
-                  </div>
-                )}
-                
-                <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                <div className={`max-w-xs px-4 py-3 rounded-2xl shadow-lg ${
                   message.sender === 'user'
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                    : 'bg-gray-100 text-gray-800'
+                    ? 'bg-white text-purple-800 rounded-br-md'
+                    : 'bg-white/20 text-white rounded-bl-md'
                 }`}>
-                  <p className="text-sm">{message.text}</p>
+                  <p className="text-sm leading-relaxed">{message.text}</p>
                 </div>
-
-                {message.sender === 'user' && (
-                  <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
-                    <User className="w-4 h-4 text-gray-600" />
-                  </div>
-                )}
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Options or Actions */}
-          <div className="p-6 border-t bg-gray-50 rounded-b-lg">
-            {currentQuestion && (
-              <div className="space-y-3">
-                <p className="text-sm font-medium text-gray-600 mb-4">Selecciona una opción:</p>
-                <div className="grid gap-2">
-                  {currentQuestion.options.map((option, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      className="justify-start text-left h-auto p-3 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white transition-all duration-300"
-                      onClick={() => handleAnswer(option)}
-                    >
-                      {option.text}
-                    </Button>
-                  ))}
-                </div>
+          {currentQuestion && (
+            <div className="space-y-3 animate-fade-in">
+              <div className="grid gap-3">
+                {currentQuestion.options.map((option, index) => (
+                  <Button
+                    key={index}
+                    variant="ghost"
+                    className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-2xl h-auto p-4 text-left justify-start transition-all duration-300 hover:scale-105"
+                    onClick={() => handleAnswer(option)}
+                  >
+                    {option.text}
+                  </Button>
+                ))}
               </div>
-            )}
+            </div>
+          )}
 
-            {isComplete && (
-              <div className="space-y-4">
-                <Button
-                  className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl transition-all duration-300"
-                  onClick={handleExploreRecommendation}
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    Explorar Recomendación
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={restartChat}
-                >
+          {isComplete && (
+            <div className="space-y-4 animate-fade-in">
+              <Button
+                className="w-full bg-white text-purple-700 hover:bg-white/90 font-semibold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg"
+                onClick={handleExploreRecommendation}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  Explorar Recomendación
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-white border border-white/20 hover:bg-white/10 rounded-2xl py-4 transition-all duration-300"
+                onClick={restartChat}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <RotateCcw className="w-4 h-4" />
                   Empezar de Nuevo
-                </Button>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+                </span>
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
