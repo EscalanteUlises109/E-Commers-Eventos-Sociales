@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import EventTypes from "@/components/EventTypes";
+import EventSelection from "@/components/EventSelection";
 import Services from "@/components/Services";
 import ServiceProviders from "@/components/ServiceProviders";
 import QuoteForm from "@/components/QuoteForm";
@@ -12,7 +12,7 @@ const Index = () => {
       <Navigation />
       <main>
         <HeroSection />
-        <EventTypes />
+        <EventSelection />
         <Services />
         <ServiceProviders />
         <QuoteForm />

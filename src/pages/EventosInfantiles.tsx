@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import EventTypes from "@/components/EventTypes";
+import EventSelection from "@/components/EventSelection";
 import Footer from "@/components/Footer";
 
 const EventosInfantiles = () => {
@@ -7,7 +7,7 @@ const EventosInfantiles = () => {
     <div className="min-h-screen">
       <Navigation />
       <main>
-        <EventTypes />
+        <EventSelection />
       </main>
       <Footer />
     </div>
