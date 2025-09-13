@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles, User, LogOut } from "lucide-react";
+import { Menu, X, Sparkles, User, LogOut, Home, Calendar, Settings, Heart, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -9,11 +9,11 @@ const Navigation = () => {
   const { user, logout } = useAuth();
 
   const navItems = [
-    { name: "Inicio", href: "/inicio" },
-    { name: "Eventos", href: "/eventos" },
-    { name: "Servicios", href: "/servicios" },
-    { name: "Favoritos", href: "/favoritos" },
-    { name: "Perfil", href: "/perfil" },
+    { name: "Inicio", href: "/inicio", icon: Home },
+    { name: "Eventos", href: "/eventos", icon: Calendar },
+    { name: "Servicios", href: "/servicios", icon: Briefcase },
+    { name: "Favoritos", href: "/favoritos", icon: Heart },
+    { name: "Perfil", href: "/perfil", icon: User },
   ];
 
   return (
@@ -33,15 +33,19 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-foreground hover:text-rose px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="text-foreground hover:text-rose px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <IconComponent className="w-4 h-4" />
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -83,16 +87,20 @@ const Navigation = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-champagne">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-foreground hover:text-rose block px-3 py-2 text-base font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-foreground hover:text-rose block px-3 py-2 text-base font-medium flex items-center gap-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  {item.name}
+                </Link>
+              );
+            })}
             <div className="pt-2 space-y-2">
               {user ? (
                 <div className="space-y-2">
