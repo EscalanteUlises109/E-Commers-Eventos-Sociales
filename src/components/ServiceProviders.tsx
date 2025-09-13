@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Star, MapPin, Clock } from "lucide-react";
+import ReservationModal from "./ReservationModal";
 
 // Import service images
 import animacionInfantilImg from "@/assets/animacion-infantil.jpg";
@@ -22,6 +23,13 @@ import personalApoyoImg from "@/assets/personal-apoyo.jpg";
 
 const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales" | "corporativos" }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<any>(null);
+
+  const handleReservation = (service: any) => {
+    setSelectedService(service);
+    setIsModalOpen(true);
+  };
 
   const services = {
     infantiles: [
@@ -281,7 +289,10 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                   </div>
                 </div>
                 
-                <Button className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium rounded-full transition-all duration-300">
+                <Button 
+                  onClick={() => handleReservation(service)}
+                  className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium rounded-full transition-all duration-300"
+                >
                   Reservar Ahora
                 </Button>
               </CardContent>
@@ -289,6 +300,12 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
           ))}
         </div>
       </div>
+
+      <ReservationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        service={selectedService}
+      />
     </section>
   );
 };
