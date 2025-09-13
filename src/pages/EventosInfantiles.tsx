@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import ServiceProviders from "@/components/ServiceProviders";
+
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -194,7 +194,7 @@ const EventosInfantiles = () => {
           </div>
         </section>
 
-        <ServiceProviders eventType="infantiles" />
+        
       </main>
       <Footer />
     </div>

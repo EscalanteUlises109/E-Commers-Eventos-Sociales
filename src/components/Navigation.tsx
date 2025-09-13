@@ -14,7 +14,7 @@ const Navigation = () => {
       // User not logged in - show basic navigation
       return [
         { name: "Inicio", href: "/inicio", icon: Home },
-        { name: "Eventos", href: "/eventos-infantiles", icon: Calendar },
+        { name: "Eventos", href: "/eventos", icon: Calendar },
         { name: "Servicios", href: "/servicios", icon: Briefcase },
       ];
     }
@@ -24,7 +24,7 @@ const Navigation = () => {
       return [
         { name: "Inicio", href: "/inicio", icon: Home },
         { name: "Mis Eventos", href: "/dashboard-cliente", icon: BarChart3 },
-        { name: "Eventos", href: "/eventos-infantiles", icon: Calendar },
+        { name: "Eventos", href: "/eventos", icon: Calendar },
         { name: "Servicios", href: "/servicios", icon: Briefcase },
         { name: "Favoritos", href: "/favoritos", icon: Heart },
       ];
