@@ -116,15 +116,15 @@ const EventChatbot = () => {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 flex items-center justify-center p-4 pt-20">
       <div className="w-full max-w-4xl mx-auto">
         
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+        <div className="text-center mb-12">
+          <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
             <Sparkles className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2">Bienvenidos</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Bienvenidos</h1>
           <p className="text-white/80 text-lg">Te ayudamos a encontrar tu evento ideal</p>
         </div>
 
