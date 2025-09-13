@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles, User, LogOut, Home, Calendar, Settings, Heart, Briefcase } from "lucide-react";
+import { Menu, X, Sparkles, User, LogOut, Home, Calendar, Settings, Heart, Briefcase, BarChart3, Users, CalendarDays } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -8,13 +8,38 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
-  const navItems = [
-    { name: "Inicio", href: "/inicio", icon: Home },
-    { name: "Eventos", href: "/eventos", icon: Calendar },
-    { name: "Servicios", href: "/servicios", icon: Briefcase },
-    { name: "Favoritos", href: "/favoritos", icon: Heart },
-    { name: "Perfil", href: "/perfil", icon: User },
-  ];
+  // Dynamic navigation items based on authentication status and user role
+  const getNavItems = () => {
+    if (!user) {
+      // User not logged in - show basic navigation
+      return [
+        { name: "Inicio", href: "/inicio", icon: Home },
+        { name: "Eventos", href: "/eventos-infantiles", icon: Calendar },
+        { name: "Servicios", href: "/servicios", icon: Briefcase },
+      ];
+    }
+
+    if (user.role === 'cliente') {
+      // Client navigation
+      return [
+        { name: "Inicio", href: "/inicio", icon: Home },
+        { name: "Eventos", href: "/eventos-infantiles", icon: Calendar },
+        { name: "Servicios", href: "/servicios", icon: Briefcase },
+        { name: "Favoritos", href: "/favoritos", icon: Heart },
+        { name: "Mis Eventos", href: "/dashboard-cliente", icon: BarChart3 },
+      ];
+    } else {
+      // Provider navigation
+      return [
+        { name: "Inicio", href: "/inicio", icon: Home },
+        { name: "Mi Negocio", href: "/dashboard-proveedor", icon: BarChart3 },
+        { name: "Reservas", href: "/dashboard-proveedor", icon: Calendar },
+        { name: "Clientes", href: "/dashboard-proveedor", icon: Users },
+      ];
+    }
+  };
+
+  const navItems = getNavItems();
 
   return (
     <nav className="fixed w-full z-50 bg-background/90 backdrop-blur-lg border-b border-champagne">
@@ -53,6 +78,10 @@ const Navigation = () => {
           <div className="hidden md:block">
             {user ? (
               <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 text-sm text-elegant-gray">
+                  <div className={`w-2 h-2 rounded-full ${user.role === 'cliente' ? 'bg-blue-500' : 'bg-green-500'}`}></div>
+                  <span className="capitalize">{user.role}</span>
+                </div>
                 <Link to={user.role === 'cliente' ? '/dashboard-cliente' : '/dashboard-proveedor'}>
                   <Button variant="outline" size="sm" className="flex items-center">
                     <User className="w-4 h-4 mr-2" />
@@ -68,7 +97,20 @@ const Navigation = () => {
                   <LogOut className="w-4 h-4" />
                 </Button>
               </div>
-            ) : null}
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link to="/perfil">
+                  <Button variant="outline" size="sm">
+                    Iniciar Sesión
+                  </Button>
+                </Link>
+                <Link to="/perfil">
+                  <Button size="sm" className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white">
+                    Registrarse
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -104,14 +146,21 @@ const Navigation = () => {
             <div className="pt-2 space-y-2">
               {user ? (
                 <div className="space-y-2">
+                  <div className="flex items-center justify-center space-x-2 text-sm text-elegant-gray bg-gray-50 rounded-lg py-2">
+                    <div className={`w-2 h-2 rounded-full ${user.role === 'cliente' ? 'bg-blue-500' : 'bg-green-500'}`}></div>
+                    <span className="capitalize font-medium">{user.role}: {user.name}</span>
+                  </div>
                   <Link to={user.role === 'cliente' ? '/dashboard-cliente' : '/dashboard-proveedor'}>
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full" onClick={() => setIsMenuOpen(false)}>
                       <User className="w-4 h-4 mr-2" />
-                      {user.name}
+                      Mi Dashboard
                     </Button>
                   </Link>
                   <Button 
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
                     variant="ghost" 
                     className="w-full text-red-600 hover:text-red-700"
                   >
@@ -119,7 +168,20 @@ const Navigation = () => {
                     Cerrar Sesión
                   </Button>
                 </div>
-              ) : null}
+              ) : (
+                <div className="space-y-2">
+                  <Link to="/perfil">
+                    <Button variant="outline" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                      Iniciar Sesión
+                    </Button>
+                  </Link>
+                  <Link to="/perfil">
+                    <Button className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white" onClick={() => setIsMenuOpen(false)}>
+                      Registrarse
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
