@@ -8,6 +8,7 @@ import EventSelection from "./pages/EventSelection";
 import EventosInfantiles from "./pages/EventosInfantiles";
 import EventosFormales from "./pages/EventosFormales";
 import EventosCorporativos from "./pages/EventosCorporativos";
+import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProfileSelection from "./pages/ProfileSelection";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/eventos-infantiles" element={<EventosInfantiles />} />
             <Route path="/eventos-formales" element={<EventosFormales />} />
             <Route path="/eventos-corporativos" element={<EventosCorporativos />} />
+            <Route path="/servicios" element={<Services />} />
             <Route path="/nosotros" element={<About />} />
             <Route path="/contacto" element={<Contact />} />
             <Route path="/perfil" element={<ProfileSelection />} />

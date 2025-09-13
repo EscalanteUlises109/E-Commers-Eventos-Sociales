@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, Gift, Utensils, MapPin, Mail, Users, Truck } from "lucide-react";
+import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, Gift } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
@@ -83,64 +83,6 @@ const EventSelection = () => {
     }
   ];
 
-  const allServices = [
-    {
-      title: "Decoración",
-      description: "Ambientación personalizada con los más finos detalles",
-      icon: Palette,
-      color: "from-purple-400 to-pink-500",
-      price: "Desde $2,500 MXN"
-    },
-    {
-      title: "Catering", 
-      description: "Menús gourmet adaptados a tus gustos y presupuesto",
-      icon: Utensils,
-      color: "from-orange-500 to-red-500", 
-      price: "Desde $350 MXN/persona"
-    },
-    {
-      title: "Entretenimiento",
-      description: "Animación, música en vivo y espectáculos únicos",
-      icon: Music,
-      color: "from-blue-400 to-blue-600",
-      price: "Desde $3,000 MXN"
-    },
-    {
-      title: "Fotografía y Video",
-      description: "Capturamos cada momento especial profesionalmente", 
-      icon: Camera,
-      color: "from-green-400 to-teal-500",
-      price: "Desde $4,500 MXN"
-    },
-    {
-      title: "Lugares y Sedes",
-      description: "Espacios únicos y perfectos para tu celebración",
-      icon: MapPin,
-      color: "from-orange-400 to-yellow-500", 
-      price: "Desde $8,000 MXN"
-    },
-    {
-      title: "Invitaciones",
-      description: "Diseños digitales y físicos que impresionan",
-      icon: Mail,
-      color: "from-pink-400 to-rose-500",
-      price: "Desde $15 MXN/unidad"
-    },
-    {
-      title: "Logística", 
-      description: "Coordinación completa para que no te preocupes por nada",
-      icon: Truck,
-      color: "from-blue-500 to-purple-600",
-      price: "Desde $2,000 MXN"
-    },
-    {
-      title: "Gestión de Invitados",
-      description: "Control de asistencia y comunicación personalizada", 
-      icon: Users,
-      color: "from-cyan-400 to-blue-500",
-      price: "Desde $1,500 MXN"
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 font-montserrat overflow-hidden">
@@ -275,41 +217,6 @@ const EventSelection = () => {
             </div>
           </section>
 
-          {/* Nuestros Servicios Section */}
-          <section className="mt-24 mb-24 bg-white/50 backdrop-blur-sm rounded-3xl p-8 lg:p-12">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Nuestros
-                <span className="bg-gradient-to-r from-rose-500 to-gold bg-clip-text text-transparent ml-2">
-                  Servicios
-                </span>
-              </h2>
-              <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
-                Servicios integrales para hacer de tu evento una experiencia inolvidable
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {allServices.map((service, index) => (
-                <Card key={index} className="group border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white">
-                  <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300`}>
-                      <service.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-rose-600 transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-elegant-gray text-sm mb-4 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <p className="text-rose-500 font-bold text-sm">
-                      {service.price}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
 
           {/* Footer Note */}
           <div className="text-center mt-16 lg:mt-20">
