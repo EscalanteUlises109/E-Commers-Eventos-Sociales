@@ -4,17 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Baby, Heart, Briefcase, Search, Filter, Star, MapPin, Clock } from "lucide-react";
+import { Search, Filter, Star, MapPin, Clock } from "lucide-react";
 
 const ServiceProviders = () => {
-  const [activeEventType, setActiveEventType] = useState("infantiles");
   const [searchTerm, setSearchTerm] = useState("");
-
-  const eventTypes = [
-    { id: "infantiles", label: "Eventos Infantiles", icon: Baby },
-    { id: "formales", label: "Eventos Formales", icon: Heart },
-    { id: "corporativos", label: "Eventos Corporativos", icon: Briefcase }
-  ];
 
   const services = {
     infantiles: [
@@ -145,8 +138,13 @@ const ServiceProviders = () => {
     ]
   };
 
-  const currentServices = services[activeEventType as keyof typeof services];
-  const serviceCount = currentServices.length;
+  const allServices = [
+    ...services.infantiles,
+    ...services.formales,
+    ...services.corporativos
+  ];
+
+  const serviceCount = allServices.length;
 
   return (
     <section className="py-20 bg-gradient-to-b from-champagne/10 to-background">
@@ -162,25 +160,6 @@ const ServiceProviders = () => {
           <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
             Filtra y encuentra exactamente lo que necesitas para tu evento
           </p>
-        </div>
-
-        {/* Event Type Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          {eventTypes.map((type) => (
-            <Button
-              key={type.id}
-              variant={activeEventType === type.id ? "default" : "outline"}
-              onClick={() => setActiveEventType(type.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${
-                activeEventType === type.id
-                  ? "bg-gradient-to-r from-rose to-gold text-white shadow-elegant"
-                  : "border-border hover:border-rose/50"
-              }`}
-            >
-              <type.icon className="w-4 h-4" />
-              {type.label}
-            </Button>
-          ))}
         </div>
 
         {/* Search and Filters */}
@@ -220,7 +199,7 @@ const ServiceProviders = () => {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {currentServices.map((service, index) => (
+          {allServices.map((service, index) => (
             <Card key={index} className="group overflow-hidden border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
               <div className="relative h-48 bg-gradient-to-br from-champagne to-gold-light">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
