@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
 import Footer from "@/components/Footer";
 import { Heart } from "lucide-react";
-import champagneBg from "@/assets/champagne-celebration-background.gif";
+import weddingBg from "@/assets/wedding-celebration.gif";
 
 const EventosFormales = () => {
   return (
@@ -15,7 +15,7 @@ const EventosFormales = () => {
           <div 
             className="absolute inset-0 z-0 opacity-20"
             style={{
-              backgroundImage: `url(${champagneBg})`,
+              backgroundImage: `url(${weddingBg})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat'

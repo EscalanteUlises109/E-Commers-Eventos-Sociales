@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
 import Footer from "@/components/Footer";
 import { Baby } from "lucide-react";
-import kidsPartyBg from "@/assets/kids-party-background.gif";
+import kidsPartyBg from "@/assets/kids-birthday-party.gif";
 
 const EventosInfantiles = () => {
   return (
