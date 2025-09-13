@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { SearchProvider } from "@/contexts/SearchContext";
+import Index from "./pages/Index";
 import EventSelection from "./pages/EventSelection";
 import EventosInfantiles from "./pages/EventosInfantiles";
 import EventosFormales from "./pages/EventosFormales";
@@ -36,7 +37,7 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<EventSelection />} />
-                <Route path="/inicio" element={<EventSelection />} />
+                <Route path="/inicio" element={<Index />} />
                 <Route path="/eventos-infantiles" element={<EventosInfantiles />} />
                 <Route path="/eventos-formales" element={<EventosFormales />} />
                 <Route path="/eventos-corporativos" element={<EventosCorporativos />} />
