@@ -28,7 +28,7 @@ const Navigation = () => {
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-rose to-gold bg-clip-text text-transparent">
-              EventosPerfectos
+              EventFastWeb
             </span>
           </Link>
 
