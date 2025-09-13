@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
 import Footer from "@/components/Footer";
 import { Briefcase } from "lucide-react";
-import businessBg from "@/assets/business-meeting.gif";
+import businessBg from "@/assets/corporate-presentation.gif";
 
 const EventosCorporativos = () => {
   return (
