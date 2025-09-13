@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import EventChatbot from "@/components/EventChatbot";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -6,6 +7,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <main>
+        <EventChatbot />
       </main>
       <Footer />
     </div>
