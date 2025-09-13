@@ -72,45 +72,7 @@ const EventosFormales = () => {
           </div>
         </section>
 
-        {/* Servicios Especializados */}
-        <section className="py-20 bg-gradient-to-b from-rose-50 to-pink-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Servicios 
-                <span className="bg-gradient-to-r from-rose to-gold bg-clip-text text-transparent ml-2">
-                  Exclusivos
-                </span>
-              </h2>
-              <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
-                Cada detalle cuidado para crear la celebración perfecta
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {formalServices.map((service, index) => (
-                <Card key={index} className="group border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
-                  <CardHeader className="text-center pb-2">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                      <service.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-rose transition-colors duration-300">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-elegant-gray text-center">
-                      {service.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Componentes existentes adaptados */}
-        <Services />
         <div className="bg-gradient-to-b from-rose-50/50 to-pink-50/50">
           <ServiceProviders />
         </div>
