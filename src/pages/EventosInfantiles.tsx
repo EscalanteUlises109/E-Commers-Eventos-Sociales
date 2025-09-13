@@ -27,8 +27,7 @@ const EventosInfantiles = () => {
               <Baby className="w-16 h-16 mx-auto mb-4 text-blue-600" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Proveedores para
-              <span className="block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Eventos Infantiles
               </span>
             </h1>
