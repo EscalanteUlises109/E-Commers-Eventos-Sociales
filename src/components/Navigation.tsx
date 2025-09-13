@@ -9,7 +9,7 @@ const Navigation = () => {
   const { user, logout } = useAuth();
 
   const navItems = [
-    { name: "Inicio", href: "/" },
+    { name: "Inicio", href: "/inicio" },
     { name: "Eventos", href: "/eventos" },
     { name: "Servicios", href: "/servicios" },
     { name: "Favoritos", href: "/favoritos" },
@@ -23,7 +23,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/inicio" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-rose to-gold rounded-full flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
