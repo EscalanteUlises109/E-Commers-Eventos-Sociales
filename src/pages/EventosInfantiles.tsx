@@ -2,7 +2,6 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import Services from "@/components/Services";
 import ServiceProviders from "@/components/ServiceProviders";
-import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -114,7 +113,6 @@ const EventosInfantiles = () => {
         <div className="bg-gradient-to-b from-blue-50/50 to-purple-50/50">
           <ServiceProviders />
         </div>
-        <QuoteForm />
       </main>
       <Footer />
     </div>
