@@ -20,21 +20,21 @@ const Navigation = () => {
     }
 
     if (user.role === 'cliente') {
-      // Client navigation
+      // Client navigation - prioritizing personal dashboard after home
       return [
         { name: "Inicio", href: "/inicio", icon: Home },
+        { name: "Mis Eventos", href: "/dashboard-cliente", icon: BarChart3 },
         { name: "Eventos", href: "/eventos-infantiles", icon: Calendar },
         { name: "Servicios", href: "/servicios", icon: Briefcase },
         { name: "Favoritos", href: "/favoritos", icon: Heart },
-        { name: "Mis Eventos", href: "/dashboard-cliente", icon: BarChart3 },
       ];
     } else {
-      // Provider navigation
+      // Provider navigation - logical business flow
       return [
         { name: "Inicio", href: "/inicio", icon: Home },
         { name: "Mi Negocio", href: "/dashboard-proveedor", icon: BarChart3 },
-        { name: "Reservas", href: "/dashboard-proveedor", icon: Calendar },
         { name: "Clientes", href: "/dashboard-proveedor", icon: Users },
+        { name: "Reservas", href: "/dashboard-proveedor", icon: CalendarDays },
       ];
     }
   };
