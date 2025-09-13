@@ -4,6 +4,7 @@ import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, G
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import kidsEventImage from "@/assets/kids-event.jpg";
 import weddingEventImage from "@/assets/wedding-event.jpg";
 import corporateEventImage from "@/assets/corporate-event.jpg";
@@ -323,6 +324,7 @@ const EventSelection = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
