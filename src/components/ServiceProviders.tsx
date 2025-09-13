@@ -6,6 +6,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Star, MapPin, Clock } from "lucide-react";
 
+// Import service images
+import animacionInfantilImg from "@/assets/animacion-infantil.jpg";
+import decoracionInfantilImg from "@/assets/decoracion-infantil.jpg";
+import cateringInfantilImg from "@/assets/catering-infantil.jpg";
+import fotografiaInfantilImg from "@/assets/fotografia-infantil.jpg";
+import fotografiaBodasImg from "@/assets/fotografia-bodas.jpg";
+import cateringGourmetImg from "@/assets/catering-gourmet.jpg";
+import bandaMusicalImg from "@/assets/banda-musical.jpg";
+import coordinacionEventosImg from "@/assets/coordinacion-eventos.jpg";
+import tecnologiaAvImg from "@/assets/tecnologia-av.jpg";
+import cateringEjecutivoImg from "@/assets/catering-ejecutivo.jpg";
+import produccionCorporativaImg from "@/assets/produccion-corporativa.jpg";
+import personalApoyoImg from "@/assets/personal-apoyo.jpg";
+
 const ServiceProviders = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -19,7 +33,8 @@ const ServiceProviders = () => {
         duration: "3 horas",
         price: "$45,000",
         rating: 4.9,
-        featured: true
+        featured: true,
+        image: animacionInfantilImg
       },
       {
         title: "Decoración Temática Premium",
@@ -29,7 +44,8 @@ const ServiceProviders = () => {
         duration: "Evento completo",
         price: "$35,000",
         rating: 4.8,
-        featured: false
+        featured: false,
+        image: decoracionInfantilImg
       },
       {
         title: "Catering Infantil Gourmet",
@@ -39,7 +55,8 @@ const ServiceProviders = () => {
         duration: "4 horas",
         price: "$25,000",
         rating: 4.7,
-        featured: true
+        featured: true,
+        image: cateringInfantilImg
       },
       {
         title: "Fotografía Infantil Artística",
@@ -49,7 +66,8 @@ const ServiceProviders = () => {
         duration: "6 horas",
         price: "$55,000",
         rating: 4.9,
-        featured: false
+        featured: false,
+        image: fotografiaInfantilImg
       }
     ],
     formales: [
@@ -61,7 +79,8 @@ const ServiceProviders = () => {
         duration: "8 horas",
         price: "$85,000",
         rating: 5.0,
-        featured: true
+        featured: true,
+        image: fotografiaBodasImg
       },
       {
         title: "Catering Gourmet Premium",
@@ -71,7 +90,8 @@ const ServiceProviders = () => {
         duration: "Evento completo",
         price: "$45,000",
         rating: 4.8,
-        featured: true
+        featured: true,
+        image: cateringGourmetImg
       },
       {
         title: "Banda Musical en Vivo",
@@ -81,7 +101,8 @@ const ServiceProviders = () => {
         duration: "4 horas",
         price: "$35,000",
         rating: 4.7,
-        featured: false
+        featured: false,
+        image: bandaMusicalImg
       },
       {
         title: "Coordinación de Eventos Premium",
@@ -91,7 +112,8 @@ const ServiceProviders = () => {
         duration: "Servicio completo",
         price: "$65,000",
         rating: 4.9,
-        featured: true
+        featured: true,
+        image: coordinacionEventosImg
       }
     ],
     corporativos: [
@@ -103,7 +125,8 @@ const ServiceProviders = () => {
         duration: "Evento completo",
         price: "$75,000",
         rating: 4.8,
-        featured: true
+        featured: true,
+        image: tecnologiaAvImg
       },
       {
         title: "Catering Ejecutivo Premium",
@@ -113,7 +136,8 @@ const ServiceProviders = () => {
         duration: "6 horas",
         price: "$55,000",
         rating: 4.7,
-        featured: false
+        featured: false,
+        image: cateringEjecutivoImg
       },
       {
         title: "Producción de Eventos Corporativos",
@@ -123,7 +147,8 @@ const ServiceProviders = () => {
         duration: "Servicio completo",
         price: "$95,000",
         rating: 4.9,
-        featured: true
+        featured: true,
+        image: produccionCorporativaImg
       },
       {
         title: "Hostess y Personal de Apoyo",
@@ -133,7 +158,8 @@ const ServiceProviders = () => {
         duration: "8 horas",
         price: "$25,000",
         rating: 4.6,
-        featured: false
+        featured: false,
+        image: personalApoyoImg
       }
     ]
   };
@@ -201,8 +227,13 @@ const ServiceProviders = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {allServices.map((service, index) => (
             <Card key={index} className="group overflow-hidden border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
-              <div className="relative h-48 bg-gradient-to-br from-champagne to-gold-light">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 {service.featured && (
                   <Badge className="absolute top-3 left-3 bg-gradient-to-r from-rose to-gold text-white border-0">
                     Destacado
