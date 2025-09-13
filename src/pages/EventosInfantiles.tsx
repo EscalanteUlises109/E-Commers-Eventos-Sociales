@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
 import Footer from "@/components/Footer";
 import { Baby } from "lucide-react";
+import kidsPartyBg from "@/assets/kids-party-background.gif";
 
 const EventosInfantiles = () => {
   return (
@@ -9,8 +10,19 @@ const EventosInfantiles = () => {
       <Navigation />
       <main>
         {/* Header */}
-        <section className="relative py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="relative py-20 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden">
+          {/* GIF Background */}
+          <div 
+            className="absolute inset-0 z-0 opacity-20"
+            style={{
+              backgroundImage: `url(${kidsPartyBg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="mb-8">
               <Baby className="w-16 h-16 mx-auto mb-4 text-blue-600" />
             </div>

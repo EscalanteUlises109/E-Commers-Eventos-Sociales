@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
 import Footer from "@/components/Footer";
 import { Briefcase } from "lucide-react";
+import businessBg from "@/assets/business-conference-background.gif";
 
 const EventosCorporativos = () => {
   return (
@@ -9,8 +10,19 @@ const EventosCorporativos = () => {
       <Navigation />
       <main>
         {/* Header */}
-        <section className="relative py-20 bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="relative py-20 bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100 overflow-hidden">
+          {/* GIF Background */}
+          <div 
+            className="absolute inset-0 z-0 opacity-20"
+            style={{
+              backgroundImage: `url(${businessBg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="mb-8">
               <Briefcase className="w-16 h-16 mx-auto mb-4 text-blue-600" />
             </div>
