@@ -14,17 +14,7 @@ import { es } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
-interface Service {
-  title: string;
-  category: string;
-  description: string;
-  location: string;
-  duration: string;
-  price: string;
-  rating: number;
-  featured: boolean;
-  image: string;
-}
+import { useFavorites, Service } from "@/contexts/FavoritesContext";
 
 interface ReservationModalProps {
   isOpen: boolean;
