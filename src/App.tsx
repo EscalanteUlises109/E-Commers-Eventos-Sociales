@@ -10,6 +10,7 @@ import EventosFormales from "./pages/EventosFormales";
 import EventosCorporativos from "./pages/EventosCorporativos";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProfileSelection from "./pages/ProfileSelection";
 import LoginCliente from "./pages/LoginCliente";
 import LoginProveedor from "./pages/LoginProveedor";
 import DashboardCliente from "./pages/DashboardCliente";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/eventos-corporativos" element={<EventosCorporativos />} />
             <Route path="/nosotros" element={<About />} />
             <Route path="/contacto" element={<Contact />} />
+            <Route path="/perfil" element={<ProfileSelection />} />
             <Route path="/login-cliente" element={<LoginCliente />} />
             <Route path="/login-proveedor" element={<LoginProveedor />} />
             <Route path="/dashboard-cliente" element={<DashboardCliente />} />
