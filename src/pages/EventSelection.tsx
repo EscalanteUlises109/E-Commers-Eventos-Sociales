@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, Gift, Utensils, MapPin, Mail, Users, Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Navigation from "@/components/Navigation";
 import kidsEventImage from "@/assets/kids-event.jpg";
 import weddingEventImage from "@/assets/wedding-event.jpg";
 import corporateEventImage from "@/assets/corporate-event.jpg";
@@ -142,6 +143,7 @@ const EventSelection = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 font-montserrat overflow-hidden">
+      <Navigation />
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-rose-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
