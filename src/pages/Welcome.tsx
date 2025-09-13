@@ -18,16 +18,42 @@ const Welcome = () => {
   return (
     <div className={`min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 font-montserrat flex items-center justify-center p-4 transition-all duration-1000 ${isAnimating ? 'scale-125 opacity-0 blur-sm' : 'scale-100 opacity-100 blur-0'}`}>
       
-      {/* Transition Overlay */}
+      {/* Spiral Transition Overlay */}
       {isAnimating && (
-        <div className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 z-50 animate-fade-in">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mb-4 mx-auto"></div>
-              <p className="text-white text-lg font-medium animate-pulse">Preparando tu experiencia...</p>
-            </div>
-          </div>
-        </div>
+        <>
+          <div 
+            className="fixed inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 z-50 origin-center"
+            style={{
+              animation: 'spiral-close 0.8s ease-in-out forwards',
+            }}
+          />
+          <style dangerouslySetInnerHTML={{
+            __html: `
+              @keyframes spiral-close {
+                0% {
+                  clip-path: circle(150% at 50% 50%);
+                  transform: rotate(0deg);
+                }
+                25% {
+                  clip-path: circle(100% at 50% 50%);
+                  transform: rotate(90deg);
+                }
+                50% {
+                  clip-path: circle(70% at 50% 50%);
+                  transform: rotate(180deg);
+                }
+                75% {
+                  clip-path: circle(40% at 50% 50%);
+                  transform: rotate(270deg);
+                }
+                100% {
+                  clip-path: circle(0% at 50% 50%);
+                  transform: rotate(360deg);
+                }
+              }
+            `
+          }} />
+        </>
       )}
       
       {/* Background Elements */}
@@ -89,12 +115,6 @@ const Welcome = () => {
           </p>
         </div>
 
-        {/* Loading Animation */}
-        {isAnimating && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
-          </div>
-        )}
       </div>
     </div>
   );
