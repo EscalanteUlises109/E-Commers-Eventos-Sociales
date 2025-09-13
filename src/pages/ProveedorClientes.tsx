@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, MessageCircle, Phone, Mail, Star, Calendar, Search } from "lucide-react";
+import { Users, MessageCircle, Phone, Mail, Star, Calendar, Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
@@ -92,7 +92,8 @@ const ProveedorClientes = () => {
               />
             </div>
             <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
-              Agregar Cliente
+              <Filter className="w-4 h-4 mr-2" />
+              Filtrar Clientes
             </Button>
           </div>
 
