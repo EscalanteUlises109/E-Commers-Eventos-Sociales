@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, Users, Calendar, TrendingUp, LogOut, Briefcase, Star, MessageCircle } from "lucide-react";
+import { DollarSign, Users, Calendar, TrendingUp, LogOut, Briefcase, Star, MessageCircle, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 
@@ -125,7 +125,13 @@ const DashboardProveedor = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white justify-start">
+              <Link to="/agregar-evento">
+                <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white justify-start">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Agregar Nuevo Evento
+                </Button>
+              </Link>
+              <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white justify-start">
                 <DollarSign className="w-4 h-4 mr-2" />
                 Gestionar Precios
               </Button>
