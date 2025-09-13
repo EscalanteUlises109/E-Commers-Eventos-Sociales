@@ -83,118 +83,92 @@ const DashboardCliente = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Events */}
-          <Card className="border-0 shadow-luxury bg-gradient-to-br from-white to-rose-50/30 backdrop-blur-sm">
-            <CardHeader className="pb-4">
+          <Card className="border-0 shadow-card">
+            <CardHeader>
               <CardTitle className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-rose to-gold rounded-xl flex items-center justify-center shadow-md">
-                    <Calendar className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-rose to-gold bg-clip-text text-transparent">
-                      Mis Eventos
-                    </h2>
-                    <p className="text-sm text-elegant-gray mt-1">Tu próxima celebración</p>
-                  </div>
+                <div className="flex items-center">
+                  <Calendar className="w-5 h-5 mr-2 text-rose" />
+                  Mis Eventos
                 </div>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  className="bg-white/80 text-rose border-rose/30 hover:bg-rose/5 hover:border-rose/50 shadow-sm backdrop-blur-sm"
-                >
+                <Button size="sm" variant="outline" className="text-rose border-rose/50 hover:bg-rose/5">
                   Ver Todos
                 </Button>
               </CardTitle>
+              <CardDescription>
+                Eventos en proceso de planificación
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6 p-6">
+            <CardContent className="space-y-6">
               {recentEvents.map((event, index) => (
                 <div key={index} className="group relative">
                   {/* Event Card */}
-                  <div className="relative overflow-hidden bg-white/80 backdrop-blur-md rounded-2xl border border-white/20 shadow-card hover:shadow-luxury transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
-                    {/* Gradient Background Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-rose-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    <div className="relative p-6 space-y-4">
-                      {/* Event Header */}
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1 space-y-3">
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-gradient-to-br from-rose/10 to-gold/10 rounded-full flex items-center justify-center border border-rose/20">
-                              <Calendar className="w-6 h-6 text-rose" />
-                            </div>
-                            <div>
-                              <h4 className="text-xl font-bold text-foreground mb-1">{event.name}</h4>
-                              <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-elegant-gray" />
-                                <span className="text-elegant-gray text-sm">{event.date}</span>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          {/* Status Badge */}
-                          <div className="flex items-center gap-2">
-                            <span className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm ${
-                              event.status === 'Confirmado' ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white' :
-                              event.status === 'Planificando' ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white' :
-                              'bg-gradient-to-r from-blue-400 to-indigo-500 text-white'
-                            }`}>
-                              {event.status}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        {/* Action Button */}
-                        <div className="ml-6">
-                          <Button
-                            size="sm"
-                            className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white shadow-md opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300"
-                          >
-                            Gestionar
-                          </Button>
-                        </div>
-                      </div>
-                      
-                      {/* Progress Section */}
-                      <div className="bg-gradient-to-r from-gray-50/80 to-white/80 rounded-xl p-4 space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold text-foreground">Progreso del evento</span>
-                          <span className="text-lg font-bold bg-gradient-to-r from-rose to-gold bg-clip-text text-transparent">
-                            {event.progress}%
+                  <div className="bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className="font-bold text-lg text-foreground">{event.name}</h4>
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            event.status === 'Confirmado' ? 'bg-green-100 text-green-800' :
+                            event.status === 'Planificando' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {event.status}
                           </span>
                         </div>
-                        <div className="relative w-full bg-gray-200/80 rounded-full h-4 overflow-hidden shadow-inner">
-                          <div 
-                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-rose via-pink-400 to-gold rounded-full transition-all duration-700 ease-out shadow-sm" 
-                            style={{ width: `${event.progress}%` }}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse opacity-50" />
-                        </div>
-                        <div className="flex justify-between text-xs text-elegant-gray font-medium">
-                          <span>🎯 Iniciado</span>
-                          <span>🎉 Completo</span>
+                        <p className="text-elegant-gray flex items-center gap-2 mb-3">
+                          <Calendar className="w-4 h-4" />
+                          {event.date}
+                        </p>
+                        
+                        {/* Progress Section */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Progreso del evento</span>
+                            <span className="text-sm font-bold text-rose">{event.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div 
+                              className="bg-gradient-to-r from-rose to-gold h-3 rounded-full transition-all duration-500 ease-out shadow-sm" 
+                              style={{ width: `${event.progress}%` }}
+                            />
+                          </div>
+                          <div className="flex justify-between text-xs text-elegant-gray">
+                            <span>Iniciado</span>
+                            <span>Completo</span>
+                          </div>
                         </div>
                       </div>
                       
-                      {/* Event Stats */}
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100/50">
-                        <div className="flex items-center gap-6">
-                          <div className="flex items-center gap-2 text-sm text-elegant-gray">
-                            <div className="w-3 h-3 bg-gradient-to-r from-rose to-pink-400 rounded-full shadow-sm"></div>
-                            <span className="font-medium">5 proveedores</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-elegant-gray">
-                            <div className="w-3 h-3 bg-gradient-to-r from-gold to-yellow-400 rounded-full shadow-sm"></div>
-                            <span className="font-medium">3 pendientes</span>
-                          </div>
+                      {/* Action Button */}
+                      <div className="ml-4">
+                        <Button
+                          size="sm"
+                          className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        >
+                          Gestionar
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {/* Event Details Footer */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-4 text-xs text-elegant-gray">
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-rose rounded-full"></div>
+                          <span>5 proveedores</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Button size="sm" variant="ghost" className="h-10 w-10 p-0 text-elegant-gray hover:text-rose hover:bg-rose/5 rounded-full transition-all duration-200">
-                            <MessageCircle className="w-5 h-5" />
-                          </Button>
-                          <Button size="sm" variant="ghost" className="h-10 w-10 p-0 text-elegant-gray hover:text-gold hover:bg-gold/5 rounded-full transition-all duration-200">
-                            <Star className="w-5 h-5" />
-                          </Button>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-gold rounded-full"></div>
+                          <span>3 pendientes</span>
                         </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-elegant-gray hover:text-rose">
+                          <MessageCircle className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-elegant-gray hover:text-rose">
+                          <Star className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -202,14 +176,10 @@ const DashboardCliente = () => {
               ))}
               
               {/* Add New Event Button */}
-              <div className="pt-6">
-                <Button className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 hover:from-blue-600 hover:via-purple-600 hover:to-indigo-700 text-white border-2 border-dashed border-white/30 hover:border-white/50 rounded-2xl py-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                  <div className="flex items-center justify-center space-x-3">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Calendar className="w-5 h-5" />
-                    </div>
-                    <span className="text-lg font-semibold">Planear Nuevo Evento</span>
-                  </div>
+              <div className="pt-4">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-2 border-dashed border-transparent hover:border-white/20 rounded-xl py-6">
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Planear Nuevo Evento
                 </Button>
               </div>
             </CardContent>
