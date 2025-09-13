@@ -1,6 +1,5 @@
 import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
-import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Heart } from "lucide-react";
 
@@ -28,7 +27,6 @@ const EventosFormales = () => {
         </section>
 
         <ServiceProviders eventType="formales" />
-        <QuoteForm />
       </main>
       <Footer />
     </div>

@@ -1,6 +1,5 @@
 import Navigation from "@/components/Navigation";
 import ServiceProviders from "@/components/ServiceProviders";
-import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Briefcase } from "lucide-react";
 
@@ -28,7 +27,6 @@ const EventosCorporativos = () => {
         </section>
 
         <ServiceProviders eventType="corporativos" />
-        <QuoteForm />
       </main>
       <Footer />
     </div>
