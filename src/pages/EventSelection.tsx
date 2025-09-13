@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Baby, Heart, Briefcase, ArrowRight, Sparkles } from "lucide-react";
+import { Baby, Heart, Briefcase, ArrowRight, Sparkles, Music, Palette, Camera, Gift, Utensils, MapPin, Mail, Users, Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import kidsEventImage from "@/assets/kids-event.jpg";
@@ -53,6 +53,92 @@ const EventSelection = () => {
   const handleEventSelection = (route: string) => {
     navigate(route);
   };
+
+  const specializedServices = [
+    {
+      title: "Animación Profesional",
+      description: "Shows interactivos con magos, payasos y personajes favoritos",
+      icon: Music,
+      color: "from-blue-400 to-purple-500"
+    },
+    {
+      title: "Decoración Temática", 
+      description: "Ambientación personalizada con los temas favoritos de los niños",
+      icon: Palette,
+      color: "from-purple-400 to-pink-500"
+    },
+    {
+      title: "Fotografía Infantil",
+      description: "Captura cada momento especial con estilo artístico", 
+      icon: Camera,
+      color: "from-pink-400 to-rose-500"
+    },
+    {
+      title: "Sorpresas y Regalos",
+      description: "Detalles especiales que harán sonreír a todos los niños",
+      icon: Gift,
+      color: "from-rose-400 to-orange-500"
+    }
+  ];
+
+  const allServices = [
+    {
+      title: "Decoración",
+      description: "Ambientación personalizada con los más finos detalles",
+      icon: Palette,
+      color: "from-purple-400 to-pink-500",
+      price: "Desde $2,500 MXN"
+    },
+    {
+      title: "Catering", 
+      description: "Menús gourmet adaptados a tus gustos y presupuesto",
+      icon: Utensils,
+      color: "from-orange-500 to-red-500", 
+      price: "Desde $350 MXN/persona"
+    },
+    {
+      title: "Entretenimiento",
+      description: "Animación, música en vivo y espectáculos únicos",
+      icon: Music,
+      color: "from-blue-400 to-blue-600",
+      price: "Desde $3,000 MXN"
+    },
+    {
+      title: "Fotografía y Video",
+      description: "Capturamos cada momento especial profesionalmente", 
+      icon: Camera,
+      color: "from-green-400 to-teal-500",
+      price: "Desde $4,500 MXN"
+    },
+    {
+      title: "Lugares y Sedes",
+      description: "Espacios únicos y perfectos para tu celebración",
+      icon: MapPin,
+      color: "from-orange-400 to-yellow-500", 
+      price: "Desde $8,000 MXN"
+    },
+    {
+      title: "Invitaciones",
+      description: "Diseños digitales y físicos que impresionan",
+      icon: Mail,
+      color: "from-pink-400 to-rose-500",
+      price: "Desde $15 MXN/unidad"
+    },
+    {
+      title: "Logística", 
+      description: "Coordinación completa para que no te preocupes por nada",
+      icon: Truck,
+      color: "from-blue-500 to-purple-600",
+      price: "Desde $2,000 MXN"
+    },
+    {
+      title: "Gestión de Invitados",
+      description: "Control de asistencia y comunicación personalizada", 
+      icon: Users,
+      color: "from-cyan-400 to-blue-500",
+      price: "Desde $1,500 MXN"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 font-montserrat overflow-hidden">
@@ -150,6 +236,77 @@ const EventSelection = () => {
               </Card>
             ))}
           </div>
+
+          {/* Servicios Especializados Section */}
+          <section className="mt-32 mb-24">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Servicios 
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent ml-2">
+                  Especializados
+                </span>
+              </h2>
+              <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
+                Todo lo que necesitas para hacer de la celebración un momento inolvidable
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {specializedServices.map((service, index) => (
+                <Card key={index} className="group border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
+                  <CardHeader className="text-center pb-2">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                      <service.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-blue-600 transition-colors duration-300">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-elegant-gray text-center">
+                      {service.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          {/* Nuestros Servicios Section */}
+          <section className="mt-24 mb-24 bg-white/50 backdrop-blur-sm rounded-3xl p-8 lg:p-12">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Nuestros
+                <span className="bg-gradient-to-r from-rose-500 to-gold bg-clip-text text-transparent ml-2">
+                  Servicios
+                </span>
+              </h2>
+              <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
+                Servicios integrales para hacer de tu evento una experiencia inolvidable
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {allServices.map((service, index) => (
+                <Card key={index} className="group border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white">
+                  <CardContent className="p-6 text-center">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                      <service.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-rose-600 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-elegant-gray text-sm mb-4 leading-relaxed">
+                      {service.description}
+                    </p>
+                    <p className="text-rose-500 font-bold text-sm">
+                      {service.price}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
 
           {/* Footer Note */}
           <div className="text-center mt-16 lg:mt-20">
