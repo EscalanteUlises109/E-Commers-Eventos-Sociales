@@ -5,6 +5,7 @@ import { Calendar, Clock, MapPin, User, DollarSign, Filter, Search, CheckCircle,
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Navigation from "@/components/Navigation";
 
 const ProveedorReservas = () => {
   const { user } = useAuth();
@@ -114,6 +115,7 @@ const ProveedorReservas = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <Navigation />
       {/* Header */}
       <header className="bg-white/90 backdrop-blur-lg border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
