@@ -10,7 +10,7 @@ const EventosCorporativos = () => {
       <Navigation />
       <main>
         {/* Header */}
-        <section className="relative py-20 bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100 overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-600 overflow-hidden">
           {/* GIF Background */}
           <div 
             className="absolute inset-0 z-0 opacity-20"
@@ -24,14 +24,14 @@ const EventosCorporativos = () => {
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="mb-8">
-              <Briefcase className="w-16 h-16 mx-auto mb-4 text-blue-600" />
+              <Briefcase className="w-16 h-16 mx-auto mb-4 text-white" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              <span className="bg-gradient-to-r from-white to-gray-100 bg-clip-text text-transparent">
                 Eventos Corporativos
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 max-w-3xl mx-auto">
               Encuentra los mejores proveedores especializados en eventos corporativos
             </p>
           </div>
