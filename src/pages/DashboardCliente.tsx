@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, MessageCircle, Star, Clock, LogOut, User, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
 
 const DashboardCliente = () => {
   const { user, logout } = useAuth();
@@ -26,6 +27,7 @@ const DashboardCliente = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 to-gold-50">
+      <Navigation />
       {/* Header */}
       <header className="bg-white/90 backdrop-blur-lg border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
