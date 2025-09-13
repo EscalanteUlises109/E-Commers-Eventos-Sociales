@@ -1,4 +1,6 @@
 import Navigation from "@/components/Navigation";
+import ServiceProviders from "@/components/ServiceProviders";
+import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -134,6 +136,8 @@ const EventosFormales = () => {
           </div>
         </section>
 
+        <ServiceProviders eventType="formales" />
+        <QuoteForm />
       </main>
       <Footer />
     </div>

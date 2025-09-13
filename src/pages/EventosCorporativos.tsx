@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
-
-
+import ServiceProviders from "@/components/ServiceProviders";
+import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -136,6 +136,8 @@ const EventosCorporativos = () => {
           </div>
         </section>
 
+        <ServiceProviders eventType="corporativos" />
+        <QuoteForm />
       </main>
       <Footer />
     </div>
