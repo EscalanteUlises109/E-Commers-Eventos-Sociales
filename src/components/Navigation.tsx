@@ -66,14 +66,7 @@ const Navigation = () => {
                   <LogOut className="w-4 h-4" />
                 </Button>
               </div>
-            ) : (
-              <Link to="/perfil">
-                <Button className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium px-4 py-2 rounded-full shadow-elegant transition-all duration-300 hover:shadow-luxury flex items-center">
-                  <User className="w-4 h-4 mr-2" />
-                  Perfil
-                </Button>
-              </Link>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile menu button */}
@@ -120,14 +113,7 @@ const Navigation = () => {
                     Cerrar Sesión
                   </Button>
                 </div>
-              ) : (
-                <Link to="/perfil">
-                  <Button className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium py-2 rounded-full flex items-center justify-center">
-                    <User className="w-4 h-4 mr-2" />
-                    Perfil
-                  </Button>
-                </Link>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
