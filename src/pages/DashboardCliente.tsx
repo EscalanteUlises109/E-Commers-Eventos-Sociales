@@ -83,39 +83,103 @@ const DashboardCliente = () => {
           {/* Recent Events */}
           <Card className="border-0 shadow-card">
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2 text-rose" />
-                Mis Eventos
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <Calendar className="w-5 h-5 mr-2 text-rose" />
+                  Mis Eventos
+                </div>
+                <Button size="sm" variant="outline" className="text-rose border-rose/50 hover:bg-rose/5">
+                  Ver Todos
+                </Button>
               </CardTitle>
               <CardDescription>
                 Eventos en proceso de planificación
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               {recentEvents.map((event, index) => (
-                <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-rose-50 to-gold-50 rounded-lg">
-                  <div>
-                    <h4 className="font-semibold text-foreground">{event.name}</h4>
-                    <p className="text-sm text-elegant-gray">{event.date}</p>
-                    <div className="flex items-center mt-2">
-                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
-                        <div 
-                          className="bg-gradient-to-r from-rose to-gold h-2 rounded-full" 
-                          style={{ width: `${event.progress}%` }}
-                        ></div>
+                <div key={index} className="group relative">
+                  {/* Event Card */}
+                  <div className="bg-gradient-to-r from-white to-gray-50/50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className="font-bold text-lg text-foreground">{event.name}</h4>
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            event.status === 'Confirmado' ? 'bg-green-100 text-green-800' :
+                            event.status === 'Planificando' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {event.status}
+                          </span>
+                        </div>
+                        <p className="text-elegant-gray flex items-center gap-2 mb-3">
+                          <Calendar className="w-4 h-4" />
+                          {event.date}
+                        </p>
+                        
+                        {/* Progress Section */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-foreground">Progreso del evento</span>
+                            <span className="text-sm font-bold text-rose">{event.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div 
+                              className="bg-gradient-to-r from-rose to-gold h-3 rounded-full transition-all duration-500 ease-out shadow-sm" 
+                              style={{ width: `${event.progress}%` }}
+                            />
+                          </div>
+                          <div className="flex justify-between text-xs text-elegant-gray">
+                            <span>Iniciado</span>
+                            <span>Completo</span>
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-xs text-elegant-gray">{event.progress}%</span>
+                      
+                      {/* Action Button */}
+                      <div className="ml-4">
+                        <Button
+                          size="sm"
+                          className="bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        >
+                          Gestionar
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {/* Event Details Footer */}
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-4 text-xs text-elegant-gray">
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-rose rounded-full"></div>
+                          <span>5 proveedores</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 bg-gold rounded-full"></div>
+                          <span>3 pendientes</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-elegant-gray hover:text-rose">
+                          <MessageCircle className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="ghost" className="h-8 w-8 p-0 text-elegant-gray hover:text-rose">
+                          <Star className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    event.status === 'Confirmado' ? 'bg-green-100 text-green-800' :
-                    event.status === 'Planificando' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-blue-100 text-blue-800'
-                  }`}>
-                    {event.status}
-                  </span>
                 </div>
               ))}
+              
+              {/* Add New Event Button */}
+              <div className="pt-4">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white border-2 border-dashed border-transparent hover:border-white/20 rounded-xl py-6">
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Planear Nuevo Evento
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
