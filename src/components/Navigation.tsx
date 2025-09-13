@@ -13,8 +13,6 @@ const Navigation = () => {
     { name: "Eventos", href: "/eventos" },
     { name: "Servicios", href: "/servicios" },
     { name: "Favoritos", href: "/favoritos" },
-    { name: "Nosotros", href: "/nosotros" },
-    { name: "Contacto", href: "/contacto" },
     { name: "Perfil", href: "/perfil" },
   ];
 
