@@ -186,20 +186,20 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
     <section className="py-20 bg-gradient-to-b from-champagne/10 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-champagne/30">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Encuentra el 
             <span className="bg-gradient-to-r from-rose to-gold bg-clip-text text-transparent ml-2">
               proveedor perfecto
             </span>
           </h2>
-          <p className="text-xl text-elegant-gray max-w-3xl mx-auto">
+          <p className="text-xl text-foreground/80 max-w-3xl mx-auto font-medium">
             Filtra y encuentra exactamente lo que necesitas para tu evento
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-card mb-8">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-champagne/30 mb-8">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-elegant-gray w-5 h-5" />
@@ -207,12 +207,12 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                 placeholder="Buscar servicios, proveedores, ubicaciones..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-border/50 focus:border-rose rounded-full h-12"
+                className="pl-10 border-champagne/60 focus:border-rose focus:ring-2 focus:ring-rose/20 rounded-full h-12 bg-white shadow-sm font-medium"
               />
             </div>
             <Select>
-              <SelectTrigger className="w-full md:w-48 rounded-full h-12 border-border/50">
-                <Filter className="w-4 h-4 mr-2" />
+              <SelectTrigger className="w-full md:w-48 rounded-full h-12 border-champagne/60 bg-white shadow-sm font-medium hover:border-rose/50 transition-colors">
+                <Filter className="w-4 h-4 mr-2 text-elegant-gray" />
                 <SelectValue placeholder="Todas las categorías" />
               </SelectTrigger>
               <SelectContent>
@@ -223,50 +223,55 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                 <SelectItem value="decoracion">Decoración</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="outline" className="rounded-full h-12 px-6 border-border/50 hover:border-rose/50">
+            <Button 
+              variant="outline" 
+              className="rounded-full h-12 px-6 border-champagne/60 bg-white hover:border-rose/50 hover:bg-rose/5 shadow-sm font-medium transition-all duration-200"
+            >
               Destacados
             </Button>
           </div>
           
           <div className="mt-4 text-center">
-            <span className="text-elegant-gray font-medium">{serviceCount} servicios encontrados</span>
+            <span className="text-elegant-gray font-semibold bg-champagne/20 px-4 py-2 rounded-full">
+              {serviceCount} servicios encontrados
+            </span>
           </div>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {allServices.map((service, index) => (
-            <Card key={index} className="group overflow-hidden border-0 shadow-card hover:shadow-luxury transition-all duration-300 hover:scale-105 bg-white/90 backdrop-blur-sm">
+            <Card key={index} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-white backdrop-blur-sm">
               <div className="relative h-48 overflow-hidden">
                 <img 
                   src={service.image} 
                   alt={service.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 {service.featured && (
-                  <Badge className="absolute top-3 left-3 bg-gradient-to-r from-rose to-gold text-white border-0">
+                  <Badge className="absolute top-3 left-3 bg-gradient-to-r from-rose to-gold text-white border-0 shadow-md">
                     Destacado
                   </Badge>
                 )}
                 <div className="absolute bottom-3 left-3 right-3">
-                  <Badge variant="secondary" className="bg-white/90 text-foreground text-xs">
+                  <Badge variant="secondary" className="bg-white/95 text-foreground text-xs font-semibold shadow-sm">
                     {service.category}
                   </Badge>
                 </div>
               </div>
               
-              <CardHeader className="pb-2">
+              <CardHeader className="pb-2 bg-white/95">
                 <CardTitle className="text-lg font-bold text-foreground group-hover:text-rose transition-colors duration-300 line-clamp-2">
                   {service.title}
                 </CardTitle>
-                <CardDescription className="text-elegant-gray text-sm line-clamp-2">
+                <CardDescription className="text-foreground/70 text-sm line-clamp-2 font-medium">
                   {service.description}
                 </CardDescription>
               </CardHeader>
               
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-4 text-xs text-elegant-gray">
+              <CardContent className="space-y-3 bg-white/95">
+                <div className="flex items-center gap-4 text-xs text-foreground/70 font-medium">
                   <div className="flex items-center gap-1">
                     <MapPin className="w-3 h-3" />
                     {service.location}
@@ -280,18 +285,18 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-medium">{service.rating}</span>
-                    <span className="text-xs text-elegant-gray">reseñas</span>
+                    <span className="text-sm font-bold text-foreground">{service.rating}</span>
+                    <span className="text-xs text-foreground/60 font-medium">reseñas</span>
                   </div>
                   <div className="text-right">
                     <div className="text-lg font-bold text-foreground">{service.price}</div>
-                    <div className="text-xs text-elegant-gray">64 reseñas</div>
+                    <div className="text-xs text-foreground/60 font-medium">64 reseñas</div>
                   </div>
                 </div>
                 
                 <Button 
                   onClick={() => handleReservation(service)}
-                  className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-medium rounded-full transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Reservar Ahora
                 </Button>
