@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import Services from "@/components/Services";
 import ServiceProviders from "@/components/ServiceProviders";
+import EventTypes from "@/components/EventTypes";
 import QuoteForm from "@/components/QuoteForm";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -72,6 +73,9 @@ const EventosCorporativos = () => {
           </div>
         </section>
 
+        {/* Opciones de tipos de eventos */}
+        <EventTypes />
+        
         {/* Componentes existentes adaptados */}
         <div className="bg-gradient-to-b from-blue-50/50 to-cyan-50/50">
           <ServiceProviders eventType="corporativos" />
