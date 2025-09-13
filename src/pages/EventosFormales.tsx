@@ -27,8 +27,7 @@ const EventosFormales = () => {
               <Heart className="w-16 h-16 mx-auto mb-4 text-rose-600" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Proveedores para
-              <span className="block bg-gradient-to-r from-rose-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-rose-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
                 Eventos Formales
               </span>
             </h1>
