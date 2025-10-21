@@ -87,13 +87,10 @@ Claves utilizadas y dónde se usan:
 	- Contexto: `src/contexts/ReviewsContext.tsx`.
 	- Vistas relacionadas: `pages/VerResenas.tsx`, `pages/DashboardCliente.tsx`.
 
-Restablecer datos de la demo
-- Limpia el almacenamiento desde la consola del navegador: `localStorage.clear()` o elimina claves específicas.
-- También puedes usar el modo incógnito o otro navegador para comenzar desde cero.
+
 
 ### Migración a una base de datos real (opcional)
 
-Si deseas persistencia multiusuario y datos compartidos, puedes sustituir `localStorage` por un backend (REST/GraphQL o BaaS como Supabase/Firebase). Recomendación de endpoints/tablas mínimos:
 
 - users: id, name, email, role, password_hash
 - services (events): id, title, category, description, location, duration, base_price, event_type, images, created_at
@@ -104,13 +101,5 @@ Si deseas persistencia multiusuario y datos compartidos, puedes sustituir `local
 - reviews: id, service_id, user_id, rating, comment, created_at, response
 - notifications (opcional): id, user_id, type, payload, read, created_at
 
-Integración sugerida:
-- Crea una capa `src/lib/api.ts` con funciones `fetch`/axios.
-- Reemplaza en los contextos las lecturas/escrituras de `localStorage` por llamadas a la API.
-- Maneja autenticación (tokens JWT o sesiones) y control de errores/loading.
 
----
 
-¿Contribuir?
-- Abre un issue o PR con mejoras.
-- Opcional: agrega una licencia (MIT recomendada) y configura CI/CD según tu plataforma.
