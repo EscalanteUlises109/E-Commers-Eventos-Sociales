@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
 import { useFavorites, Service } from "@/contexts/FavoritesContext";
+import { useAvailability } from "@/contexts/AvailabilityContext";
 
 interface ReservationModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ interface ReservationModalProps {
 
 const ReservationModal = ({ isOpen, onClose, service }: ReservationModalProps) => {
   const { toast } = useToast();
+  const { addBooking, isDateUnavailable, getDateInfo } = useAvailability();
   const [date, setDate] = useState<Date>();
   const [formData, setFormData] = useState({
     name: "",
@@ -52,7 +54,8 @@ const ReservationModal = ({ isOpen, onClose, service }: ReservationModalProps) =
       return;
     }
 
-    // Aquí se enviaría la información al backend
+    // Registrar booking en disponibilidad
+    addBooking(service.id, date);
     toast({
       title: "¡Reserva enviada!",
       description: `Tu solicitud para ${service.title} ha sido enviada. Te contactaremos pronto.`,
@@ -203,6 +206,13 @@ const ReservationModal = ({ isOpen, onClose, service }: ReservationModalProps) =
                       onSelect={setDate}
                       initialFocus
                       locale={es}
+                      disabled={(d) => isDateUnavailable(service.id, d)}
+                      modifiers={{
+                        booked: (d) => getDateInfo(service.id, d)?.status === 'booked'
+                      }}
+                      modifiersClassNames={{
+                        booked: 'bg-yellow-200 text-yellow-900 hover:bg-yellow-300'
+                      }}
                     />
                   </PopoverContent>
                 </Popover>

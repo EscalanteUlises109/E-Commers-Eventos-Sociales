@@ -7,6 +7,11 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { SearchProvider } from "@/contexts/SearchContext";
 import Index from "./pages/Index";
+import { EventsProvider } from "@/contexts/EventsContext";
+import { AvailabilityProvider } from "@/contexts/AvailabilityContext";
+import { PricingProvider } from "@/contexts/PricingContext";
+import { NotificationsProvider } from "@/contexts/NotificationsContext";
+import { ReviewsProvider } from "@/contexts/ReviewsContext";
 import EventSelection from "./pages/EventSelection";
 import EventosInfantiles from "./pages/EventosInfantiles";
 import EventosFormales from "./pages/EventosFormales";
@@ -31,11 +36,16 @@ const App = () => (
     <AuthProvider>
       <FavoritesProvider>
         <SearchProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
+          <EventsProvider>
+            <AvailabilityProvider>
+              <PricingProvider>
+                <NotificationsProvider>
+                  <ReviewsProvider>
+                    <TooltipProvider>
+                      <Toaster />
+                      <Sonner />
+                      <BrowserRouter>
+                        <Routes>
                 <Route path="/" element={<EventSelection />} />
                 <Route path="/inicio" element={<Index />} />
                 <Route path="/eventos" element={<EventSelection />} />
@@ -55,9 +65,14 @@ const App = () => (
                 <Route path="/proveedor-reservas" element={<ProveedorReservas />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
+                        </Routes>
+                      </BrowserRouter>
+                    </TooltipProvider>
+                  </ReviewsProvider>
+                </NotificationsProvider>
+              </PricingProvider>
+            </AvailabilityProvider>
+          </EventsProvider>
         </SearchProvider>
       </FavoritesProvider>
     </AuthProvider>

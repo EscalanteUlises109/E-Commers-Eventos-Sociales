@@ -1,3 +1,34 @@
+# Gala Maker Pro
+
+Aplicación frontend creada con Vite, React y TypeScript. Contiene componentes, contextos y páginas para gestionar eventos, reservas y precios.
+
+Características principales:
+- Vite + React + TypeScript
+- Tailwind CSS para estilos
+- Estructura por páginas y componentes reutilizables
+
+Cómo ejecutar localmente:
+
+1. Instala dependencias:
+
+```powershell
+pnpm install
+```
+
+2. Ejecuta en modo desarrollo:
+
+```powershell
+pnpm dev
+```
+
+3. Construir para producción:
+
+```powershell
+pnpm build
+```
+
+Notas:
+- Este README es un punto de partida. Añade más detalles del proyecto, configuración de CI/CD, y licencias según necesites.
 # Welcome to your Lovable project
 
 ## Project info

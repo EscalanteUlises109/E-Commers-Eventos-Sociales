@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles, User, LogOut, Home, Calendar, Settings, Heart, Briefcase, BarChart3, Users, CalendarDays } from "lucide-react";
+import { Menu, X, Sparkles, User, LogOut, Home, Calendar, Settings, Heart, Briefcase, BarChart3, Users, CalendarDays, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
+import CartSidebar from "@/components/CartSidebar";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+  const { itemCount } = useCart();
+  const [cartOpen, setCartOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Dynamic navigation items based on authentication status and user role
   const getNavItems = () => {
@@ -82,6 +88,15 @@ const Navigation = () => {
                   <div className={`w-2 h-2 rounded-full ${user.role === 'cliente' ? 'bg-blue-500' : 'bg-green-500'}`}></div>
                   <span className="capitalize">{user.role}</span>
                 </div>
+                {/* Cart Icon */}
+                <button onClick={() => setCartOpen(true)} className="relative group inline-flex items-center justify-center w-10 h-10 rounded-full border border-champagne/60 hover:border-rose/60 bg-white shadow-sm transition-all">
+                  <ShoppingCart className="w-5 h-5 text-elegant-gray group-hover:text-rose transition" />
+                  {itemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 text-[10px] font-bold bg-gradient-to-r from-rose to-gold text-white rounded-full px-1.5 py-0.5 shadow">
+                      {itemCount > 99 ? '99+' : itemCount}
+                    </span>
+                  )}
+                </button>
                 <Link to={user.role === 'cliente' ? '/dashboard-cliente' : '/dashboard-proveedor'}>
                   <Button variant="outline" size="sm" className="flex items-center">
                     <User className="w-4 h-4 mr-2" />
@@ -114,7 +129,13 @@ const Navigation = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-3">
+            {user && (
+              <button onClick={() => setCartOpen(true)} className="relative inline-flex items-center justify-center w-10 h-10 rounded-full border border-champagne/60 bg-white shadow-sm">
+                <ShoppingCart className="w-5 h-5 text-elegant-gray" />
+                {itemCount > 0 && <span className="absolute -top-1 -right-1 text-[10px] font-bold bg-gradient-to-r from-rose to-gold text-white rounded-full px-1.5 py-0.5">{itemCount > 99 ? '99+' : itemCount}</span>}
+              </button>
+            )}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-foreground hover:text-rose"
@@ -186,6 +207,7 @@ const Navigation = () => {
           </div>
         </div>
       )}
+  <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} onGoCheckout={() => { setCartOpen(false); navigate('/checkout'); }} />
     </nav>
   );
 };

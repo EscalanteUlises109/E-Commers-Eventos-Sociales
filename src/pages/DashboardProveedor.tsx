@@ -131,18 +131,24 @@ const DashboardProveedor = () => {
                   Agregar Nuevo Evento
                 </Button>
               </Link>
-              <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white justify-start">
-                <DollarSign className="w-4 h-4 mr-2" />
-                Gestionar Precios
-              </Button>
-              <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white justify-start">
-                <Calendar className="w-4 h-4 mr-2" />
-                Calendario de Disponibilidad
-              </Button>
-              <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white justify-start">
-                <Star className="w-4 h-4 mr-2" />
-                Ver Reseñas
-              </Button>
+              <Link to="/proveedor-precios">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white justify-start">
+                  <DollarSign className="w-4 h-4 mr-2" />
+                  Gestionar Precios
+                </Button>
+              </Link>
+              <Link to="/proveedor-disponibilidad">
+                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white justify-start">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Calendario de Disponibilidad
+                </Button>
+              </Link>
+              <Link to="/proveedor-resenas">
+                <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white justify-start">
+                  <Star className="w-4 h-4 mr-2" />
+                  Ver Reseñas
+                </Button>
+              </Link>
               <Button variant="outline" className="w-full justify-start">
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Mensajes de Clientes

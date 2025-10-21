@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Star, MapPin, Clock, Heart, X } from "lucide-react";
 import { useFavorites, Service } from "@/contexts/FavoritesContext";
+import { useEvents } from "@/contexts/EventsContext";
+import { usePricing, formatCurrency } from "@/contexts/PricingContext";
+import { useReviews } from "@/contexts/ReviewsContext";
 import { useSearch } from "@/contexts/SearchContext";
 import { useServiceFiltering } from "@/hooks/useServiceFiltering";
 import ReservationModal from "./ReservationModal";
@@ -57,170 +60,71 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
     });
   };
 
-  const services = {
-    infantiles: [
-      {
-        id: "inf-001",
-        title: "Animación Profesional Infantil",
-        category: "Entretenimiento",
-        description: "Shows interactivos con magos, payasos y personajes favoritos de los niños",
-        location: "Ciudad de México",
-        duration: "3 horas",
-        price: "$45,000",
-        rating: 4.9,
-        featured: true,
-        image: animacionInfantilImg
-      },
-      {
-        id: "inf-002",
-        title: "Decoración Temática Premium",
-        category: "Decoración",
-        description: "Decoración personalizada con temas de superhéroes, princesas y caricaturas",
-        location: "Guadalajara",
-        duration: "Evento completo",
-        price: "$35,000",
-        rating: 4.8,
-        featured: false,
-        image: decoracionInfantilImg
-      },
-      {
-        id: "inf-003",
-        title: "Catering Infantil Gourmet",
-        category: "Catering",
-        description: "Menús diseñados especialmente para niños con opciones saludables y divertidas",
-        location: "Monterrey",
-        duration: "4 horas",
-        price: "$25,000",
-        rating: 4.7,
-        featured: true,
-        image: cateringInfantilImg
-      },
-      {
-        id: "inf-004",
-        title: "Fotografía Infantil Artística",
-        category: "Fotografía",
-        description: "Sesiones fotográficas especializadas en capturar momentos mágicos infantiles",
-        location: "Ciudad de México",
-        duration: "6 horas",
-        price: "$55,000",
-        rating: 4.9,
-        featured: false,
-        image: fotografiaInfantilImg
-      }
-    ],
-    formales: [
-      {
-        id: "for-001",
-        title: "Fotografía de Bodas Elegante",
-        category: "Fotografía",
-        description: "Fotografía profesional para bodas con estilo artístico y moderno",
-        location: "Ciudad de México",
-        duration: "8 horas",
-        price: "$85,000",
-        rating: 5.0,
-        featured: true,
-        image: fotografiaBodasImg
-      },
-      {
-        id: "for-002",
-        title: "Catering Gourmet Premium",
-        category: "Catering",
-        description: "Servicio de catering con menús personalizados y presentación exquisita",
-        location: "Guadalajara",
-        duration: "Evento completo",
-        price: "$45,000",
-        rating: 4.8,
-        featured: true,
-        image: cateringGourmetImg
-      },
-      {
-        id: "for-003",
-        title: "Banda Musical en Vivo",
-        category: "Música",
-        description: "Banda versátil con repertorio amplio para todo tipo de celebraciones",
-        location: "Monterrey",
-        duration: "4 horas",
-        price: "$35,000",
-        rating: 4.7,
-        featured: false,
-        image: bandaMusicalImg
-      },
-      {
-        id: "for-004",
-        title: "Coordinación de Eventos Premium",
-        category: "Coordinación",
-        description: "Servicio completo de coordinación y organización de eventos formales",
-        location: "Ciudad de México",
-        duration: "Servicio completo",
-        price: "$65,000",
-        rating: 4.9,
-        featured: true,
-        image: coordinacionEventosImg
-      }
-    ],
-    corporativos: [
-      {
-        id: "cor-001",
-        title: "Tecnología AV Profesional",
-        category: "Tecnología",
-        description: "Equipos de audio, video y proyección de última generación para conferencias",
-        location: "Ciudad de México",
-        duration: "Evento completo",
-        price: "$75,000",
-        rating: 4.8,
-        featured: true,
-        image: tecnologiaAvImg
-      },
-      {
-        id: "cor-002",
-        title: "Catering Ejecutivo Premium",
-        category: "Catering",
-        description: "Servicio de catering especializado en eventos corporativos y networking",
-        location: "Guadalajara",
-        duration: "6 horas",
-        price: "$55,000",
-        rating: 4.7,
-        featured: false,
-        image: cateringEjecutivoImg
-      },
-      {
-        id: "cor-003",
-        title: "Producción de Eventos Corporativos",
-        category: "Producción",
-        description: "Producción integral para lanzamientos, conferencias y eventos empresariales",
-        location: "Monterrey",
-        duration: "Servicio completo",
-        price: "$95,000",
-        rating: 4.9,
-        featured: true,
-        image: produccionCorporativaImg
-      },
-      {
-        id: "cor-004",
-        title: "Hostess y Personal de Apoyo",
-        category: "Personal",
-        description: "Personal profesional capacitado para recepción y atención en eventos corporativos",
-        location: "Ciudad de México",
-        duration: "8 horas",
-        price: "$25,000",
-        rating: 4.6,
-        featured: false,
-        image: personalApoyoImg
-      }
-    ]
-  };
+  const { events } = useEvents();
+  const { getEffectivePrice, getBasePrice } = usePricing();
+  const { getServiceStats } = useReviews();
 
-  const allServices = eventType 
-    ? services[eventType] 
-    : [
-        ...services.infantiles,
-        ...services.formales,
-        ...services.corporativos
-      ];
+  // Adapt events (EventItem) to Service interface expected by rest of component without changing other logic.
+  const allServices: Service[] = useMemo(() => {
+    const mapped = events
+      .filter(e => !eventType || e.eventType === eventType)
+      .map<Service>(e => ({
+        id: e.id,
+        title: e.title,
+        category: e.category,
+        description: e.description,
+        location: e.location,
+        duration: e.duration,
+        price: e.price,
+        rating: e.rating,
+        featured: e.featured,
+        image: e.image
+      }));
+    return mapped;
+  }, [events, eventType]);
 
-  const { filteredServices, totalResults, hasActiveFilters } = useServiceFiltering(allServices);
+  // Enrich services with dynamic pricing
+  interface PricedService extends Service {
+    _dynamicPrice: number;
+    _basePrice: number;
+    _hasDiscount: boolean;
+    _applied?: { percent: number; label: string };
+  }
 
-  const categories = ['all', 'Entretenimiento', 'Decoración', 'Catering', 'Fotografía', 'Música', 'Coordinación', 'Tecnología', 'Producción', 'Personal'];
+  const pricedServices: PricedService[] = useMemo(() => allServices.map(s => {
+    const eff = getEffectivePrice(s.id);
+    const base = getBasePrice(s.id);
+    const numericBase = base ?? 0;
+    const numericEff = eff?.price ?? numericBase;
+    return {
+      ...s,
+      _dynamicPrice: numericEff,
+      _basePrice: numericBase,
+      _hasDiscount: numericEff < numericBase,
+      _applied: eff?.appliedPromotion && { percent: eff.appliedPromotion.percent, label: eff.appliedPromotion.label }
+    };
+  }), [allServices, getEffectivePrice, getBasePrice]);
+
+  const { filteredServices, totalResults, hasActiveFilters } = useServiceFiltering(pricedServices.map(ps => ({
+    id: ps.id,
+    title: ps.title,
+    category: ps.category,
+    description: ps.description,
+    location: ps.location,
+    duration: ps.duration,
+    price: ps.price,
+    rating: ps.rating,
+    featured: ps.featured,
+    image: ps.image
+  })));
+
+  // Re-map filteredServices back to enriched data for display
+  const displayServices: PricedService[] = useMemo(() => {
+    const mapById = Object.fromEntries(pricedServices.map(ps => [ps.id, ps]));
+    return filteredServices.map(s => mapById[s.id] || { ...s, _dynamicPrice: 0, _basePrice: 0, _hasDiscount: false });
+  }, [filteredServices, pricedServices]);
+
+  const categories = ['all', 'Entretenimiento', 'Decoración', 'Catering', 'Fotografía', 'Música', 'Coordinación', 'Tecnología', 'Producción', 'Personal', 'Animación', 'Renta de espacio'];
   const locations = ['all', 'Ciudad de México', 'Guadalajara', 'Monterrey'];
 
   return (
@@ -310,7 +214,9 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredServices.map((service, index) => (
+          {displayServices.map((service, index) => {
+            const stats = getServiceStats(service.id);
+            return (
             <Card key={service.id} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-white backdrop-blur-sm">
               <div className="relative h-48 overflow-hidden">
                 <img 
@@ -369,12 +275,20 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-bold text-foreground">{service.rating}</span>
-                    <span className="text-xs text-foreground/60 font-medium">reseñas</span>
+                    <span className="text-sm font-bold text-foreground">{stats.average || '0.0'}</span>
+                    <span className="text-xs text-foreground/60 font-medium">({stats.count})</span>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-foreground">{service.price}</div>
-                    <div className="text-xs text-foreground/60 font-medium">64 reseñas</div>
+                    <div className="text-right space-y-1">
+                      {service._hasDiscount && (
+                        <div className="text-xs line-through text-foreground/40 font-medium">{formatCurrency(service._basePrice)}</div>
+                      )}
+                      <div className="text-lg font-bold text-foreground">{formatCurrency(service._dynamicPrice)}</div>
+                      {service._applied && (
+                        <div className="text-[10px] font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full inline-block">-{service._applied.percent}% {service._applied.label}</div>
+                      )}
+                      <div className="text-xs text-foreground/60 font-medium">{stats.count} reseña{stats.count === 1 ? '' : 's'}</div>
+                    </div>
                   </div>
                 </div>
                 
@@ -386,7 +300,7 @@ const ServiceProviders = ({ eventType }: { eventType?: "infantiles" | "formales"
                 </Button>
               </CardContent>
             </Card>
-          ))}
+          );})}
         </div>
 
         {filteredServices.length === 0 && (

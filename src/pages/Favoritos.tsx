@@ -9,11 +9,15 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Search, Filter, Star, MapPin, Clock, Trash2, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import ReservationModal from "@/components/ReservationModal";
 
 const Favoritos = () => {
   const { favorites, removeFromFavorites, clearFavorites } = useFavorites();
+  const { addItem } = useCart();
+  const { toast } = useToast();
   const { searchTerm, setSearchTerm, categoryFilter, setCategoryFilter, sortBy, setSortBy, clearFilters } = useSearch();
   const { filteredServices, totalResults, hasActiveFilters } = useServiceFiltering(favorites);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +28,7 @@ const Favoritos = () => {
     setIsModalOpen(true);
   };
 
-  const categories = ['all', 'Entretenimiento', 'Decoración', 'Catering', 'Fotografía', 'Música', 'Coordinación', 'Tecnología', 'Producción', 'Personal'];
+  const categories = ['all', 'Entretenimiento', 'Decoración', 'Catering', 'Fotografía', 'Música', 'Coordinación', 'Tecnología', 'Producción', 'Personal', 'Animación', 'Renta de espacio'];
   const locations = ['all', 'Ciudad de México', 'Guadalajara', 'Monterrey'];
 
   return (
@@ -214,13 +218,38 @@ const Favoritos = () => {
                         </div>
                       </div>
                       
-                      <Button 
-                        onClick={() => handleReservation(service)}
-                        className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
-                      >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Reservar Ahora
-                      </Button>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          onClick={() => handleReservation(service)}
+                          className="w-full bg-gradient-to-r from-rose to-gold hover:from-rose/90 hover:to-gold/90 text-white font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg col-span-2 md:col-span-1"
+                        >
+                          Reservar
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => {
+                            // Convert price formatted string to number
+                            const num = Number(service.price.replace(/[^0-9.-]+/g, '')) || 0;
+                            addItem({
+                              id: service.id,
+                              title: service.title,
+                              price: num,
+                              image: service.image,
+                              category: service.category,
+                              max: 20
+                            });
+                            toast({
+                              title: 'Agregado al carrito',
+                              description: `${service.title} se añadió correctamente.`,
+                            });
+                          }}
+                          className="w-full rounded-full font-semibold flex items-center justify-center gap-2 border-champagne/60 hover:border-rose/60 hover:text-rose"
+                        >
+                          <ShoppingCart className="w-4 h-4" />
+                          Añadir
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
