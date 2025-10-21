@@ -1,104 +1,116 @@
 # Gala Maker Pro
 
-Aplicación frontend creada con Vite, React y TypeScript. Contiene componentes, contextos y páginas para gestionar eventos, reservas y precios.
+Aplicación web para la gestión y contratación de servicios para eventos sociales: catálogo de servicios por tipo de evento (infantiles, formales y corporativos), favoritos, carrito, reseñas, disponibilidad y gestión de precios con promociones.
 
-Características principales:
+Tecnologías:
 - Vite + React + TypeScript
-- Tailwind CSS para estilos
-- Estructura por páginas y componentes reutilizables
+- Tailwind CSS y componentes UI (shadcn/ui)
 
-Cómo ejecutar localmente:
+Principales funcionalidades:
+- Catálogo de servicios por tipo de evento con filtrado y destacados.
+- Favoritos y carrito con cupones, impuestos y costos de envío simulados.
+- Autenticación de demo por rol (cliente/proveedor) y dashboards.
+- Gestión de disponibilidad por servicio/fecha (bloquear, capacidad, reservas simuladas).
+- Gestión de precios: precio base, promociones por periodo y precio efectivo.
+- Reseñas y estadísticas por servicio.
+- Notificaciones locales por cambios relevantes (p. ej., precios).
 
-1. Instala dependencias:
+Estructura general (src/):
+- `contexts/`: estados globales (auth, eventos, carrito, precios, disponibilidad, reseñas, notificaciones).
+- `components/`: UI y widgets (navegación, carrito lateral, modales, formularios, etc.).
+- `pages/`: vistas de alto nivel (Dashboards, Gestión de Precios/Disponibilidad, Favoritos, Login, etc.).
+
+Cómo ejecutar localmente
+
+1) Instalar dependencias
 
 ```powershell
 pnpm install
 ```
 
-2. Ejecuta en modo desarrollo:
+2) Modo desarrollo
 
 ```powershell
 pnpm dev
 ```
 
-3. Construir para producción:
+3) Build de producción
 
 ```powershell
 pnpm build
 ```
 
-Notas:
-- Este README es un punto de partida. Añade más detalles del proyecto, configuración de CI/CD, y licencias según necesites.
-# Welcome to your Lovable project
+> Nota: este proyecto es frontend y funciona 100% en el navegador; no requiere backend para probarlo.
 
-## Project info
+## Bases de datos y persistencia de datos
 
-**URL**: https://lovable.dev/projects/5bf42fa2-7876-41b7-be6d-4ba9d3a8f5b9
+Actualmente no hay una base de datos externa. La persistencia se realiza en `localStorage` del navegador mediante distintas claves. Esto facilita la demo sin servidor y permite que los datos persistan entre recargas en el mismo navegador.
 
-## How can I edit this code?
+Claves utilizadas y dónde se usan:
+- `user`
+	- Qué guarda: sesión del usuario de demo (id, name, email, role).
+	- Contexto: `src/contexts/AuthContext.tsx`.
+	- Vistas relacionadas: Login de cliente/proveedor (`pages/LoginCliente.tsx`, `pages/LoginProveedor.tsx`), dashboards y navegación.
 
-There are several ways of editing your application.
+- `event-favorites`
+	- Qué guarda: lista de servicios marcados como favoritos.
+	- Contexto: `src/contexts/FavoritesContext.tsx`.
+	- Vistas relacionadas: `pages/Favoritos.tsx` (y acciones desde cards de servicios).
 
-**Use Lovable**
+- `app-events-v1`
+	- Qué guarda: catálogo de eventos/servicios (semilla + elementos añadidos por el usuario).
+	- Contexto: `src/contexts/EventsContext.tsx`.
+	- Vistas relacionadas: catálogo por tipo y secciones que muestran servicios.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5bf42fa2-7876-41b7-be6d-4ba9d3a8f5b9) and start prompting.
+- `app-pricing-v1`
+	- Qué guarda: precios base por servicio y promociones activas con rango de fechas.
+	- Contexto: `src/contexts/PricingContext.tsx`.
+	- Vistas relacionadas: `pages/GestionarPrecios.tsx` (establecer precios y promociones) y componentes que muestran precio efectivo.
 
-Changes made via Lovable will be committed automatically to this repo.
+- `app-availability-v1`
+	- Qué guarda: disponibilidad por servicio y fecha (estado: available/blocked/booked, capacidad, usados).
+	- Contexto: `src/contexts/AvailabilityContext.tsx`.
+	- Vistas relacionadas: `pages/GestionarDisponibilidad.tsx`.
 
-**Use your preferred IDE**
+- `app-notifications-v1`
+	- Qué guarda: lista de notificaciones locales (p. ej., cambios de precio o acciones relevantes).
+	- Contexto: `src/contexts/NotificationsContext.tsx`.
+	- Vistas relacionadas: se consumen desde otros contextos para informar al usuario.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- `app-cart-v1` y `app-cart-coupon-v1`
+	- Qué guarda: contenido del carrito (items, cantidades) y cupón aplicado.
+	- Contexto: `src/contexts/CartContext.tsx`.
+	- Vistas relacionadas: `components/CartSidebar.tsx`, `pages/Favoritos.tsx` (añadir al carrito).
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `app_reviews_v1`
+	- Qué guarda: reseñas de usuarios por servicio y su estado (pending/responded).
+	- Contexto: `src/contexts/ReviewsContext.tsx`.
+	- Vistas relacionadas: `pages/VerResenas.tsx`, `pages/DashboardCliente.tsx`.
 
-Follow these steps:
+Restablecer datos de la demo
+- Limpia el almacenamiento desde la consola del navegador: `localStorage.clear()` o elimina claves específicas.
+- También puedes usar el modo incógnito o otro navegador para comenzar desde cero.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Migración a una base de datos real (opcional)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Si deseas persistencia multiusuario y datos compartidos, puedes sustituir `localStorage` por un backend (REST/GraphQL o BaaS como Supabase/Firebase). Recomendación de endpoints/tablas mínimos:
 
-# Step 3: Install the necessary dependencies.
-npm i
+- users: id, name, email, role, password_hash
+- services (events): id, title, category, description, location, duration, base_price, event_type, images, created_at
+- pricing: id, service_id, base, promotions[] { id, label, percent, start, end, active }
+- availability: id, service_id, date, status, capacity, used, notes
+- favorites: id, user_id, service_id
+- cart: id, user_id, items[] { service_id, quantity, price }, coupon
+- reviews: id, service_id, user_id, rating, comment, created_at, response
+- notifications (opcional): id, user_id, type, payload, read, created_at
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Integración sugerida:
+- Crea una capa `src/lib/api.ts` con funciones `fetch`/axios.
+- Reemplaza en los contextos las lecturas/escrituras de `localStorage` por llamadas a la API.
+- Maneja autenticación (tokens JWT o sesiones) y control de errores/loading.
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/5bf42fa2-7876-41b7-be6d-4ba9d3a8f5b9) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+¿Contribuir?
+- Abre un issue o PR con mejoras.
+- Opcional: agrega una licencia (MIT recomendada) y configura CI/CD según tu plataforma.
