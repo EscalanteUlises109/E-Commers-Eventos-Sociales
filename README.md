@@ -1,4 +1,3 @@
-# Gala Maker Pro
 
 Aplicación web para la gestión y contratación de servicios para eventos sociales: catálogo de servicios por tipo de evento (infantiles, formales y corporativos), favoritos, carrito, reseñas, disponibilidad y gestión de precios con promociones.
 
